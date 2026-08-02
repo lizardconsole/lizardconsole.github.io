@@ -1,6 +1,0 @@
-{
-  "name": "Lizard",
-  "description": "AI-native data console with auto-generated CRUD, natural language query, and prompt-driven charts across multiple databases.",
-  "requestFramePermissions": [],
-  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
-}

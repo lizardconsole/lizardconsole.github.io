@@ -1,0 +1,139 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import "tailwindcss";
+
+:root {
+  --bg-primary: #ffffff;
+  --bg-secondary: #f9fafb; /* gray-50 */
+  --bg-tertiary: #f3f4f6; /* gray-100 */
+  --text-primary: #111827; /* gray-900 */
+  --text-secondary: #4b5563; /* gray-600 */
+  --text-muted: #9ca3af; /* gray-400 */
+  --border-primary: #e5e7eb; /* gray-200 */
+  --border-secondary: #f3f4f6; /* gray-100 */
+  --glow-opacity: 0.05;
+  /* Brand accent — emerald-700, readable at ~4.8:1 on a white page bg.
+     emerald-400 (the dark-theme accent) fails contrast on light backgrounds. */
+  --accent: #047857;
+  --accent-soft: rgb(4 120 87 / 8%);
+  --accent-soft-border: rgb(4 120 87 / 25%);
+}
+
+:root.dark {
+  --bg-primary: #030712; /* gray-950 */
+  --bg-secondary: #0b0f19; /* gray-900/60ish */
+  --bg-tertiary: #111827; /* gray-900 */
+  --text-primary: #f3f4f6; /* gray-100 */
+  --text-secondary: #9ca3af; /* gray-400 */
+  --text-muted: #6b7280; /* gray-500 */
+  --border-primary: #1f2937; /* gray-800 */
+  --border-secondary: #111827; /* gray-900 */
+  --glow-opacity: 0.15;
+  --accent: #34d399; /* emerald-400 */
+  --accent-soft: rgb(6 78 59 / 40%); /* emerald-950/40 */
+  --accent-soft-border: rgb(6 95 70 / 50%); /* emerald-900/50 */
+}
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Space Grotesk", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+
+  --color-bg-primary: var(--bg-primary);
+  --color-bg-secondary: var(--bg-secondary);
+  --color-bg-tertiary: var(--bg-tertiary);
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-muted: var(--text-muted);
+  --color-border-primary: var(--border-primary);
+  --color-border-secondary: var(--border-secondary);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-accent-soft-border: var(--accent-soft-border);
+}
+
+@layer base {
+  body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transition-property: background-color, color, border-color;
+    transition-duration: 200ms;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  }
+}
+
+/* Custom glow animations and scrollbars */
+.glow-mesh {
+  background-image:
+    radial-gradient(at 0% 0%, hsla(160, 84%, 39%, calc(var(--glow-opacity) * 1.0)) 0px, transparent 50%),
+    radial-gradient(at 100% 0%, hsla(217, 91%, 60%, calc(var(--glow-opacity) * 0.8)) 0px, transparent 50%),
+    radial-gradient(at 50% 100%, hsla(263, 90%, 50%, calc(var(--glow-opacity) * 0.53)) 0px, transparent 50%);
+}
+
+.glow-emerald {
+  box-shadow: 0 0 50px -12px rgba(16, 185, 129, var(--glow-opacity));
+}
+
+.glow-blue {
+  box-shadow: 0 0 50px -12px rgba(59, 130, 246, var(--glow-opacity));
+}
+
+/* Smooth hidden scrollbar but scrollable */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+@layer components {
+  .badge-accent {
+    @apply text-accent bg-accent-soft border-accent-soft-border;
+  }
+
+  .prose-lizard h1 {
+    @apply font-display text-3xl sm:text-4xl font-extrabold tracking-tight text-text-primary mb-4;
+  }
+  .prose-lizard h2 {
+    @apply font-display text-xl sm:text-2xl font-bold text-text-primary mt-10 mb-4 pt-6 border-t border-border-primary;
+  }
+  .prose-lizard h2:first-child {
+    @apply mt-0 pt-0 border-t-0;
+  }
+  .prose-lizard h3 {
+    @apply font-display text-base font-bold text-text-primary mt-6 mb-2;
+  }
+  .prose-lizard p {
+    @apply text-sm text-text-secondary leading-relaxed mb-4;
+  }
+  .prose-lizard ul {
+    @apply list-disc pl-5 space-y-2 text-sm text-text-secondary mb-4;
+  }
+  .prose-lizard li strong {
+    @apply text-text-primary;
+  }
+  .prose-lizard a {
+    @apply text-emerald-400 hover:underline;
+  }
+  .prose-lizard code {
+    @apply font-mono text-[12px] bg-bg-secondary px-1.5 py-0.5 rounded border border-border-primary text-emerald-400;
+  }
+  .prose-lizard pre {
+    @apply font-mono text-[11px] leading-relaxed bg-bg-secondary border border-border-primary rounded-xl p-4 overflow-x-auto mb-6 text-emerald-400/90;
+  }
+  .prose-lizard pre code {
+    @apply bg-transparent border-0 p-0 text-inherit;
+  }
+  .prose-lizard table {
+    @apply w-full text-xs font-mono border border-border-primary rounded-lg overflow-hidden mb-6;
+  }
+  .prose-lizard th {
+    @apply bg-bg-tertiary text-text-secondary text-left px-3 py-2 border-b border-border-primary;
+  }
+  .prose-lizard td {
+    @apply px-3 py-2 border-b border-border-primary text-text-secondary align-top;
+  }
+}
