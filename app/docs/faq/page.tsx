@@ -22,8 +22,8 @@ export default function FaqPage() {
       <h3>Does Lizard modify my database schema?</h3>
       <p>
         No. Lizard never issues DDL against your databases and never writes anything into them. All of its
-        own state — connections, overrides, virtual relationships, saved queries, dashboards, the audit
-        log — lives in a local SQLite file it owns.
+        own state — connections, overrides, virtual relationships, dashboards, the audit log — lives in a
+        local SQLite file it owns.
       </p>
 
       <h3>Do I need an AI provider API key to use Lizard?</h3>

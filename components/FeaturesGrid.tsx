@@ -27,8 +27,8 @@ const bentoItems = [
   {
     icon: BarChart3,
     title: 'Charts & Dashboards',
-    desc: 'One-click visualize any query result, or describe a chart in words. A single chart can join data from different microservice databases; save charts as dashboard panels.',
-    badge: 'Live Visualizations',
+    desc: 'Save any result as a dashboard block — one query plus how to read it, switchable between table, chart, kanban, and gallery. Variables and date ranges live in the URL, and each panel may pull from a different database.',
+    badge: 'Table · Chart · Kanban · Gallery',
     color: 'from-rose-500/10 to-red-500/5 text-rose-400 border-rose-950/40',
   },
   {

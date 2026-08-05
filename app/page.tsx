@@ -4,7 +4,10 @@ import ComparisonStrip from '@/components/ComparisonStrip';
 import FeaturesGrid from '@/components/FeaturesGrid';
 import HowItWorks from '@/components/HowItWorks';
 import Screenshots from '@/components/Screenshots';
+import Dashboards from '@/components/Dashboards';
+import TimeHandling from '@/components/TimeHandling';
 import VirtualRelationships from '@/components/VirtualRelationships';
+import AtScale from '@/components/AtScale';
 import SecuritySection from '@/components/SecuritySection';
 import Quickstart from '@/components/Quickstart';
 import CallToActionBand from '@/components/CallToActionBand';
@@ -43,7 +46,10 @@ export default function Home() {
       <FeaturesGrid />
       <HowItWorks />
       <Screenshots />
+      <Dashboards />
+      <TimeHandling />
       <VirtualRelationships />
+      <AtScale />
       <SecuritySection />
       <Quickstart />
       <CallToActionBand />

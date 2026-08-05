@@ -31,7 +31,19 @@ export default function ArchitecturePage() {
         <li><strong>Federation engine:</strong> DuckDB embedded in the Node process. It <code>ATTACH</code>es multiple databases read-only (Postgres and MySQL natively, MongoDB via DuckDB's community <code>mongo</code> extension) and runs one SQL statement across them, with filters pushed down. Nothing is installed on your databases.</li>
         <li><strong>AI:</strong> Anthropic (Claude) by default; OpenAI and Google also supported. The model gets a cheap, name-only schema skeleton plus tools it calls on demand — never a full schema dump.</li>
         <li><strong>Charts:</strong> auto-picked from the result's own shape — time series, comparison, single value, or a plain table when nothing's chartable.</li>
-        <li><strong>Metadata store:</strong> a local SQLite file holding connections, overrides, virtual relationships, saved queries, dashboards, and the audit log. Lizard never writes to the target database's schema.</li>
+        <li><strong>Metadata store:</strong> a local SQLite file holding connections, overrides, virtual relationships, dashboards, and the audit log. Lizard never writes to the target database's schema.</li>
+      </ul>
+
+      <h2>The layer between the app and your databases</h2>
+      <p>
+        With a database per microservice, the interesting engineering isn&apos;t any single query — it&apos;s
+        making sure nothing in the process scales with the size of the fleet.
+      </p>
+      <ul>
+        <li><strong>Connection pools expire.</strong> Pools are keyed by connection and role and swept on access; one untouched for ten minutes is closed and forgotten, so browsing hundreds of databases doesn&apos;t leave a live pool behind for each.</li>
+        <li><strong>The schema catalog is an LRU bounded by column count</strong> (not by number of connections), served stale-while-revalidate: past its TTL you get the last known schema immediately while re-introspection runs behind you. Schema edits made through Lizard invalidate it directly.</li>
+        <li><strong>Introspection is scoped and fanned out with a ceiling</strong> — an explicit list of connections, eight at a time, each with its own timeout, so one unreachable database is a single error entry rather than a stalled request.</li>
+        <li><strong>Session timezone is set on the connection</strong>, lazily and only when it changes, on Postgres, MySQL, and DuckDB alike — and folded into the query cache key so two zones never share a cached result.</li>
       </ul>
 
       <h2>How AI querying works</h2>
