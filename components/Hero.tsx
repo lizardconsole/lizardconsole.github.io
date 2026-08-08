@@ -1,8 +1,12 @@
-import { CheckCircle2, Github, ArrowRight, Terminal } from 'lucide-react';
+'use client';
+
+import Image from 'next/image';
+import { CheckCircle2, Github, ArrowRight, Terminal, Maximize2 } from 'lucide-react';
 import { GITHUB_URL } from '@/lib/site';
-import ScreenshotPlaceholder from './ScreenshotPlaceholder';
+import { useGallery } from './GalleryProvider';
 
 export default function Hero() {
+  const gallery = useGallery();
   return (
     <section className="relative overflow-hidden pt-12 pb-20 md:pt-16 md:pb-28 glow-mesh transition-colors duration-200">
       <div className="absolute top-1/4 left-1/2 -z-10 h-80 w-80 -translate-x-1/2 rounded-full bg-emerald-500/10 blur-[120px]" />
@@ -69,7 +73,26 @@ export default function Hero() {
                 localhost:3111
               </span>
             </div>
-            <ScreenshotPlaceholder label="Product screenshot coming soon" className="h-[360px] sm:h-[440px] rounded-none border-0" />
+            <button
+              type="button"
+              onClick={() => gallery.open(0)}
+              aria-label="Expand screenshot"
+              className="group relative block h-[360px] w-full cursor-zoom-in overflow-hidden sm:h-[440px]"
+            >
+              <Image
+                src="/screenshots/federated-orders-customers.png"
+                alt="A Lizard dashboard federating a Postgres orders table with a Postgres customers table into one revenue-by-country chart and a joined orders table"
+                fill
+                sizes="(min-width: 1024px) 1024px, 100vw"
+                className="object-cover object-top"
+                priority
+              />
+              <span className="absolute inset-0 flex items-center justify-center bg-black/0 opacity-0 transition-all duration-200 group-hover:bg-black/30 group-hover:opacity-100">
+                <span className="flex items-center gap-2 rounded-full bg-black/60 px-4 py-2 text-xs font-semibold text-white backdrop-blur-sm">
+                  <Maximize2 className="h-3.5 w-3.5" /> Expand
+                </span>
+              </span>
+            </button>
           </div>
         </div>
       </div>

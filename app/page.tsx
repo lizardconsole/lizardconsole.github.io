@@ -1,10 +1,14 @@
 import Navigation from '@/components/Navigation';
+import GalleryProvider from '@/components/GalleryProvider';
 import Hero from '@/components/Hero';
 import ComparisonStrip from '@/components/ComparisonStrip';
 import FeaturesGrid from '@/components/FeaturesGrid';
 import HowItWorks from '@/components/HowItWorks';
 import Screenshots from '@/components/Screenshots';
+import Dashboards from '@/components/Dashboards';
+import TimeHandling from '@/components/TimeHandling';
 import VirtualRelationships from '@/components/VirtualRelationships';
+import AtScale from '@/components/AtScale';
 import SecuritySection from '@/components/SecuritySection';
 import Quickstart from '@/components/Quickstart';
 import CallToActionBand from '@/components/CallToActionBand';
@@ -38,12 +42,17 @@ export default function Home() {
     <div className="min-h-screen bg-bg-primary text-text-primary flex flex-col font-sans antialiased overflow-x-hidden selection:bg-emerald-500/20 selection:text-emerald-300 transition-colors duration-200">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <Navigation />
-      <Hero />
-      <ComparisonStrip />
-      <FeaturesGrid />
-      <HowItWorks />
-      <Screenshots />
+      <GalleryProvider>
+        <Hero />
+        <ComparisonStrip />
+        <FeaturesGrid />
+        <HowItWorks />
+        <Screenshots />
+      </GalleryProvider>
+      <Dashboards />
+      <TimeHandling />
       <VirtualRelationships />
+      <AtScale />
       <SecuritySection />
       <Quickstart />
       <CallToActionBand />
