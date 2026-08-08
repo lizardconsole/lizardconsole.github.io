@@ -17,7 +17,8 @@
     "next": "^16.2.12",
     "react": "^19.0.1",
     "react-dom": "^19.0.1",
-    "serwist": "^9.5.12"
+    "serwist": "^9.5.12",
+    "yet-another-react-lightbox": "^3.32.2"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.3.3",

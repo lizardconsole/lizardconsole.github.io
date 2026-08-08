@@ -25,7 +25,7 @@ export default function RoadmapPage() {
         <li>Virtual relationships across connections and engines, with no DDL on your databases.</li>
         <li>Natural-language querying via an on-demand, tool-calling AI agent — schema exploration streams live, the generated SQL is always shown, and a run can be stopped mid-flight.</li>
         <li>One-click and prompt-driven charts, plus dashboards that pin panels from different databases.</li>
-        <li>Dashboards as pages of blocks — table, chart, kanban, and gallery views over the same query, URL-backed variables, an optional date range, tags with server-side search, save-as, and a drag-and-resize grid.</li>
+        <li>Dashboards as pages of blocks — table, chart, kanban, and gallery views over the same query, URL-backed variables (multi-select with an &quot;All&quot;, and optional <code>[[ ... ]]</code> SQL blocks), an optional date range, tags with server-side search, save-as, JSON import/export, and either a drag-and-resize grid or a single block filling the whole page.</li>
         <li>Type-aware filters, including whole-day datetime semantics (optional time pickers, half-open ranges that stay index-friendly).</li>
         <li>Timezone-correct timestamps end to end — the browser&apos;s zone is validated server-side and applied as a session setting on Postgres, MySQL, and the federation engine.</li>
         <li>Fleet-scale bounds throughout: scoped-only introspection, an enforced row limit on every query, bounded fan-out, a column-bounded catalog cache with stale-while-revalidate, idle connection-pool eviction, and paged, server-searched pickers.</li>

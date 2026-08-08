@@ -1,4 +1,4 @@
-import { Table2, BarChart3, Columns3, Images, Variable, CalendarRange, Tags } from 'lucide-react';
+import { Table2, BarChart3, Columns3, Images, Variable, CalendarRange, Tags, LayoutGrid } from 'lucide-react';
 
 const views = [
   { icon: Table2, label: 'Table' },
@@ -12,7 +12,13 @@ const capabilities = [
     icon: Variable,
     color: 'text-blue-400',
     title: 'Variables live in the URL',
-    desc: 'Declare typed placeholders, fill them at the top of the page, and every block that references them re-runs. A filtered dashboard is a link you can send.',
+    desc: 'Text, single- or multi-select, and date range. Multi-select has an optional "All" that means no filter, not every option expanded into an IN list. Wrap a clause in [[ ... ]] and it drops out of the query whenever the variable inside it is empty.',
+  },
+  {
+    icon: LayoutGrid,
+    color: 'text-emerald-400',
+    title: 'Grid or solo — your call',
+    desc: 'One block can fill the whole page instead of sitting in a grid cell, which is what a saved query or a kanban board actually is. Adding a second block promotes it to a grid automatically.',
   },
   {
     icon: CalendarRange,
@@ -23,8 +29,8 @@ const capabilities = [
   {
     icon: Tags,
     color: 'text-purple-400',
-    title: 'Tags and server-side search',
-    desc: 'The library stays navigable past a few dozen dashboards, because nothing loads the whole list to filter it in the browser.',
+    title: 'Tags, search, and JSON export',
+    desc: 'The library stays navigable past a few dozen dashboards. Every dashboard is also a portable JSON document you can export, edit, or apply from elsewhere.',
   },
 ];
 
@@ -95,8 +101,8 @@ export default function Dashboards() {
               </div>
 
               <div className="mt-6 pt-4 border-t border-border-primary text-[11px] font-mono text-text-muted">
-                Duplicate as save-as · full-screen panel editor · drag-and-resize grid · single-panel
-                dashboards open rendered, with the SQL collapsed.
+                Duplicate as save-as · full-screen panel editor, English or SQL · a solo block fills the
+                whole page, no grid chrome · import/export the whole thing as JSON.
               </div>
             </div>
           </div>

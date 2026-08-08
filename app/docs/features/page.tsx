@@ -126,16 +126,19 @@ export default function FeaturesPage() {
       <h2>Dashboards</h2>
       <p>
         A query worth keeping is worth reading. Saving a result produces a dashboard — a page of blocks,
-        where a block is one query plus how to display it.
+        where a block is one query plus how to display it. Saved queries as a separate concept are gone;
+        every saved result is a dashboard now, down to a single block.
       </p>
       <ul>
-        <li><strong>Four views over the same query</strong> — table, chart, kanban, and gallery. Switching view never means rewriting the query.</li>
+        <li><strong>Four views over the same query</strong> — table, chart, kanban, and gallery. Switching view never means rewriting the query. Kanban and gallery let you pick which column is the row&apos;s identity and which is its title, since an arbitrary <code>SELECT</code> has no primary key to assume one from.</li>
         <li><strong>Each block can target a different database</strong>, or a federated query spanning several.</li>
-        <li><strong>Variables</strong> — declare typed placeholders, fill them at the top of the page, and they substitute into every block that references them. Values live in the URL, so a filtered dashboard is a link you can send someone.</li>
+        <li><strong>Variables</strong> — text, single- or multi-select, and date range. Multi-select has an optional <strong>All</strong> that means &quot;no filter&quot;, not &quot;every option expanded into an IN list&quot;. Values live in the URL, so a filtered dashboard is a link you can send someone.</li>
+        <li><strong>Optional SQL blocks</strong> — wrap a clause in <code>[[ ... ]]</code> and it&apos;s dropped from the query whenever the variable inside it is empty, instead of every dashboard hand-rolling its own conditional <code>WHERE</code>-clause string-building.</li>
         <li><strong>An optional date range</strong>, enabled per dashboard rather than forced on every one, wired to the same whole-day semantics as table filters.</li>
         <li><strong>Tags and server-side search</strong> in the dashboard library, so it stays navigable past a few dozen.</li>
-        <li><strong>Duplicate as save-as</strong>, a full-screen panel editor for when a dialog isn&apos;t enough room, and a drag-and-resize grid layout.</li>
-        <li><strong>Single-panel dashboards</strong> are treated as their own thing — they open rendered, with the SQL collapsed out of the way.</li>
+        <li><strong>Grid or solo layout</strong> — a resizable grid of panels, or one block filling the whole page, which is what a saved query or a kanban board actually is. Adding a second panel promotes a solo page to a grid automatically.</li>
+        <li><strong>Duplicate as save-as</strong>, and a full-screen panel editor — describe the panel in English or write the SQL directly — for when a dialog isn&apos;t enough room.</li>
+        <li><strong>Import/export as JSON</strong> — a dashboard&apos;s full definition (panels, variables, layout) is one portable document you can version, diff, or hand to someone else&apos;s Lizard.</li>
       </ul>
 
       <h2>Built for a fleet</h2>
