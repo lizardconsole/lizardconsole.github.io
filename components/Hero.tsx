@@ -14,11 +14,6 @@ export default function Hero() {
 
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-4xl text-center">
-          <div className="inline-flex items-center gap-2 rounded-full border border-accent-soft-border bg-accent-soft px-3.5 py-1 text-xs text-accent mb-6">
-            <span className="flex h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
-            <span className="font-mono text-[11px] font-bold uppercase tracking-wider">Open Source · Self-Hosted</span>
-          </div>
-
           <h1 className="font-display text-4xl font-extrabold tracking-tight text-text-primary sm:text-5xl md:text-6xl lg:text-7xl leading-[1.1]">
             AI-native, zero-config data console{' '}
             <span className="bg-gradient-to-r from-emerald-400 via-teal-300 to-blue-500 bg-clip-text text-transparent block mt-2">

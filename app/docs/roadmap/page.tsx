@@ -29,6 +29,7 @@ export default function RoadmapPage() {
         <li>Type-aware filters, including whole-day datetime semantics (optional time pickers, half-open ranges that stay index-friendly).</li>
         <li>Timezone-correct timestamps end to end — the browser&apos;s zone is validated server-side and applied as a session setting on Postgres, MySQL, and the federation engine.</li>
         <li>Fleet-scale bounds throughout: scoped-only introspection, an enforced row limit on every query, bounded fan-out, a column-bounded catalog cache with stale-while-revalidate, idle connection-pool eviction, and paged, server-searched pickers.</li>
+        <li>CSV/JSON export honoring the current filters, sort, search, and column selection, with foreign keys optionally exported as a resolved &quot;(label)&quot; companion column. A result under the row-limit threshold streams straight back; anything larger becomes a background job you can leave running and cancel, tracked in Settings → Exports until you come back for it.</li>
         <li>Role-based access (admin/editor/viewer), per-connection grants, and an audit log with tiered retention.</li>
         <li>Credentials encrypted at rest (AES-256-GCM); all Lizard state lives in its own local SQLite file.</li>
       </ul>
@@ -47,7 +48,6 @@ export default function RoadmapPage() {
         <li>Saved views for tables themselves, plus calendar and self-referencing tree views (kanban and gallery already ship as dashboard blocks).</li>
         <li>Many-to-many linked records auto-detected from junction tables.</li>
         <li>Richer filter operators (regex, array contains/overlap, range overlap, jsonb containment).</li>
-        <li>CSV import/export honoring the current filter, sort, and selection.</li>
         <li>Per-view auto-refresh, per-record comments, and record history from the audit log.</li>
       </ul>
 

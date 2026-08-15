@@ -62,6 +62,11 @@
     transition-duration: 200ms;
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   }
+
+  ::selection {
+    background-color: var(--accent-soft-border);
+    color: var(--text-primary);
+  }
 }
 
 /* Custom glow animations and scrollbars */
@@ -122,7 +127,7 @@
     @apply font-mono text-[12px] bg-bg-secondary px-1.5 py-0.5 rounded border border-border-primary text-emerald-400;
   }
   .prose-lizard pre {
-    @apply font-mono text-[11px] leading-relaxed bg-bg-secondary border border-border-primary rounded-xl p-4 overflow-x-auto mb-6 text-emerald-400/90;
+    @apply font-mono text-[11px] leading-relaxed bg-bg-secondary border border-border-primary rounded-xl p-4 overflow-x-auto mb-6 text-text-primary;
   }
   .prose-lizard pre code {
     @apply bg-transparent border-0 p-0 text-inherit;

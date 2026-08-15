@@ -35,6 +35,7 @@ export default function FeaturesPage() {
         <li><strong>Reference columns render as labels, not ids</strong> — a foreign key (real or virtual) becomes a searchable picker showing the display column you nominate, falling back to the raw value when a row has no label.</li>
         <li><strong>Virtual relationships</strong> let you declare a foreign key that doesn&apos;t exist in the database — including across connections and engines. No DDL is ever run against your databases.</li>
         <li>Per-table &quot;Customize&quot; settings: display column, hidden columns, labels, and virtual relationships.</li>
+        <li><strong>Export to CSV or JSON</strong>, honoring the current filters, sort, search, and which columns you have visible. Pick a row limit, and optionally export any foreign key as a resolved &quot;(label)&quot; column alongside the raw value. A result under the row-limit threshold streams straight back as a download; a larger one becomes a background job with a cancel button, tracked from anywhere in the app until you come back to download it from Settings → Exports.</li>
       </ul>
 
       <h2>Filters</h2>
@@ -115,6 +116,7 @@ export default function FeaturesPage() {
         itself — what follows is what makes it fast enough to sit in front of.
       </p>
       <ul>
+        <li><strong>Bring your own OpenAI-compatible endpoint.</strong> On the OpenAI provider, <code>OPENAI_BASE_URL</code> points the model client at a LiteLLM proxy, Azure OpenAI, or any self-hosted gateway instead of api.openai.com — for keeping model calls on infrastructure you control.</li>
         <li><strong>Never a schema dump.</strong> The model starts from a name-only skeleton — connections, schemas, table names, no columns — and pulls detail on demand with <code>search_schema</code>, <code>describe_table</code>, and <code>get_relations</code>.</li>
         <li><strong>The skeleton is tiered and budgeted.</strong> It&apos;s generated lazily and stops the moment it hits its size budget, marking itself truncated rather than blowing the context window on a fleet that doesn&apos;t fit. Search still reaches everything that was cut.</li>
         <li><strong>Prompt caching.</strong> The stable prefix — instructions and skeleton — is marked for caching, so follow-up turns in the same session skip re-reading it.</li>
@@ -138,7 +140,8 @@ export default function FeaturesPage() {
         <li><strong>Tags and server-side search</strong> in the dashboard library, so it stays navigable past a few dozen.</li>
         <li><strong>Grid or solo layout</strong> — a resizable grid of panels, or one block filling the whole page, which is what a saved query or a kanban board actually is. Adding a second panel promotes a solo page to a grid automatically.</li>
         <li><strong>Duplicate as save-as</strong>, and a full-screen panel editor — describe the panel in English or write the SQL directly — for when a dialog isn&apos;t enough room.</li>
-        <li><strong>Import/export as JSON</strong> — a dashboard&apos;s full definition (panels, variables, layout) is one portable document you can version, diff, or hand to someone else&apos;s Lizard.</li>
+        <li><strong>Import/export as JSON</strong> — a dashboard&apos;s full definition (panels, variables, layout) is one portable document you can version, diff, or hand to someone else&apos;s Lizard, and the library can create a new dashboard straight from an imported file.</li>
+        <li><strong>Panel edits are a draft until you hit Save.</strong> Adding, editing, moving, or deleting a panel only touches local state — nothing is written until Save commits the whole batch in one go and snapshots a restorable version (capped at 100 per dashboard). Leaving with unsaved changes asks first.</li>
       </ul>
 
       <h2>Built for a fleet</h2>
@@ -192,6 +195,8 @@ export default function FeaturesPage() {
       <h2>Access control and audit</h2>
       <ul>
         <li>Admin, editor, and viewer roles, plus per-connection read/write grants.</li>
+        <li><strong>Teams</strong> — grant a connection to a team once instead of person by person; members inherit whatever the team can read or write. A team has its own managers, who can staff its roster and adjust its grants without needing admin rights.</li>
+        <li><strong>Dashboard sharing is one exclusive choice</strong> — private, specific teams, or everyone signed in — instead of two settings that could disagree with each other.</li>
         <li>An audit log of every query and every write, with tiered, configurable retention.</li>
         <li>Every statement — CRUD, AI, chart, or dashboard — passes the same SQL Guard: one parsed <code>SELECT</code>, an enforced limit, a timeout, and a read-only transaction. See the{' '}
           <Link href="/docs/security">security model</Link> for the details.</li>

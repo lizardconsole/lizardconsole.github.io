@@ -13,7 +13,10 @@ export default function QuickstartPage() {
       <h1>Quickstart</h1>
       <p>Two required environment variables, then run it.</p>
 
-      <h2>Run with npm</h2>
+      <h2>Installation</h2>
+      <p>Three ways to run Lizard, pick whichever fits your workflow.</p>
+
+      <h3>npm</h3>
       <pre>
         <code>{`npm install
 export LIZARD_ENCRYPTION_KEY=$(openssl rand -base64 32)   # required — encrypts stored DB passwords at rest
@@ -26,13 +29,40 @@ npm run dev                                                 # → http://localho
         in cross-database SQL (<code>users_service.public.customers</code>), so it must be a lowercase identifier.
       </p>
 
-      <h2>Run with Docker</h2>
+      <h3>Docker</h3>
       <pre>
         <code>{`docker run -p ${APP_PORT}:${APP_PORT} \\
   -e LIZARD_ENCRYPTION_KEY=$(openssl rand -base64 32) \\
   -e ANTHROPIC_API_KEY=sk-ant-... \\
   -v lizard_data:/app/data \\
   ${DOCKER_IMAGE}`}</code>
+      </pre>
+
+      <h3>Docker Compose</h3>
+      <p>
+        Save as <code>docker-compose.yml</code>, drop your key into <code>.env</code> next to it, then run{' '}
+        <code>docker compose up -d</code>.
+      </p>
+      <pre>
+        <code>{`services:
+  lizard:
+    image: ${DOCKER_IMAGE}
+    ports:
+      - '${APP_PORT}:${APP_PORT}'
+    environment:
+      LIZARD_ENCRYPTION_KEY: \${LIZARD_ENCRYPTION_KEY}   # required — encrypts stored DB passwords at rest
+      ANTHROPIC_API_KEY: \${ANTHROPIC_API_KEY}            # or set LIZARD_AI_PROVIDER=openai/google
+    volumes:
+      - lizard_data:/app/data
+    restart: unless-stopped
+
+volumes:
+  lizard_data:`}</code>
+      </pre>
+      <pre>
+        <code>{`# .env
+LIZARD_ENCRYPTION_KEY=...   # e.g. output of: openssl rand -base64 32
+ANTHROPIC_API_KEY=sk-ant-...`}</code>
       </pre>
 
       <h2>Provisioning credentials on your own databases</h2>
@@ -66,8 +96,11 @@ ALTER DEFAULT PRIVILEGES IN SCHEMA public
           <tr><th>Env var</th><th>Purpose</th></tr>
         </thead>
         <tbody>
-          <tr><td>LIZARD_AI_PROVIDER</td><td>anthropic | openai | google (default anthropic)</td></tr>
+          <tr><td>LIZARD_AI_PROVIDER</td><td>anthropic | openai | google | deepseek (default anthropic)</td></tr>
           <tr><td>ANTHROPIC_API_KEY</td><td>required when using the default provider</td></tr>
+          <tr><td>OPENAI_API_KEY</td><td>required when LIZARD_AI_PROVIDER=openai</td></tr>
+          <tr><td>GOOGLE_GENERATIVE_AI_API_KEY</td><td>required when LIZARD_AI_PROVIDER=google</td></tr>
+          <tr><td>DEEPSEEK_API_KEY</td><td>required when LIZARD_AI_PROVIDER=deepseek</td></tr>
           <tr><td>LIZARD_ENCRYPTION_KEY</td><td>required — encrypts stored database passwords at rest</td></tr>
           <tr><td>LIZARD_METADATA_PATH</td><td>metadata SQLite location (default ./data/lizard.sqlite)</td></tr>
           <tr><td>LIZARD_ADMIN_PASSWORD</td><td>optional single admin password to gate the UI</td></tr>

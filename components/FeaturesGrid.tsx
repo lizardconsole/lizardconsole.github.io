@@ -27,15 +27,15 @@ const bentoItems = [
   {
     icon: BarChart3,
     title: 'Charts & Dashboards',
-    desc: 'Save any result as a dashboard block — one query plus how to read it, switchable between table, chart, kanban, and gallery. Variables and date ranges live in the URL, and each panel may pull from a different database.',
-    badge: 'Table · Chart · Kanban · Gallery',
+    desc: 'Save any result as a dashboard block — one query plus how to read it, switchable between table, chart, kanban, and gallery. Panel edits are a draft until you hit Save, which snapshots a restorable version, and each panel may pull from a different database.',
+    badge: 'Versioned · Table · Chart · Kanban',
     color: 'from-rose-500/10 to-red-500/5 text-rose-400 border-rose-950/40',
   },
   {
     icon: ShieldCheck,
-    title: 'Role-Based Access & Audit Trail',
-    desc: 'Per-connection read/write grants, admin/editor/viewer roles, and an audit log of every query and write — with tiered, configurable retention.',
-    badge: 'RBAC & Audit Log',
+    title: 'Teams, RBAC & Audit Trail',
+    desc: 'Grant a connection to a team once instead of person by person — members inherit read/write access automatically. Admin/editor/viewer roles, private/team/everyone dashboard sharing, and an audit log of every query and write with tiered, configurable retention.',
+    badge: 'Teams · RBAC · Audit Log',
     color: 'from-purple-500/10 to-pink-500/5 text-purple-400 border-purple-950/40',
   },
   {
