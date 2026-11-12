@@ -1,18 +1,19 @@
-import Navigation from '@/components/Navigation';
-import GalleryProvider from '@/components/GalleryProvider';
-import Hero from '@/components/Hero';
-import ComparisonStrip from '@/components/ComparisonStrip';
-import FeaturesGrid from '@/components/FeaturesGrid';
-import HowItWorks from '@/components/HowItWorks';
-import Screenshots from '@/components/Screenshots';
-import Dashboards from '@/components/Dashboards';
-import TimeHandling from '@/components/TimeHandling';
-import VirtualRelationships from '@/components/VirtualRelationships';
-import AtScale from '@/components/AtScale';
-import SecuritySection from '@/components/SecuritySection';
-import Quickstart from '@/components/Quickstart';
-import CallToActionBand from '@/components/CallToActionBand';
-import Footer from '@/components/Footer';
+import { Navigation } from '@/components/navigation';
+import { GalleryProvider } from '@/components/gallery-provider';
+import { Hero } from '@/components/hero';
+import { FeaturesGrid } from '@/components/features-grid';
+import { HowItWorks } from '@/components/how-it-works';
+import { Screenshots } from '@/components/screenshots';
+import { VirtualRelationships } from '@/components/virtual-relationships';
+import { FileConnections } from '@/components/file-connections';
+import { Dashboards } from '@/components/dashboards';
+import { TimeHandling } from '@/components/time-handling';
+import { SecuritySection } from '@/components/security-section';
+import { AtScale } from '@/components/at-scale';
+import { ComparisonStrip } from '@/components/comparison-strip';
+import { Quickstart } from '@/components/quickstart';
+import { CallToActionBand } from '@/components/call-to-action-band';
+import { Footer } from '@/components/footer';
 import { GITHUB_URL } from '@/lib/site';
 
 const jsonLd = {
@@ -20,7 +21,7 @@ const jsonLd = {
   '@type': 'SoftwareApplication',
   name: 'Lizard',
   description:
-    'AI-native, zero-config data console for your Postgres, MySQL, and MongoDB fleet — auto-generated CRUD UI, natural-language querying, and prompt-driven charts, 100% self-hosted.',
+    'Self-hosted data console for your Postgres, MySQL and MongoDB fleet: auto-generated CRUD UI, natural-language querying, and dashboards that join across databases.',
   url: 'https://lizardconsole.github.io',
   applicationCategory: 'DeveloperApplication',
   operatingSystem: 'Self-hosted via Node.js or Docker (Linux, macOS, Windows)',
@@ -32,30 +33,33 @@ const jsonLd = {
   sameAs: [GITHUB_URL],
   author: {
     '@type': 'Organization',
-    name: 'Lizard contributors',
+    name: 'Lizard Console',
     url: GITHUB_URL,
   },
 };
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-bg-primary text-text-primary flex flex-col font-sans antialiased overflow-x-hidden selection:bg-emerald-500/20 selection:text-emerald-300 transition-colors duration-200">
+    <div className="flex min-h-screen flex-col overflow-x-clip bg-bg-primary text-text-primary">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <Navigation />
-      <GalleryProvider>
-        <Hero />
+      <main>
+        <GalleryProvider>
+          <Hero />
+          <FeaturesGrid />
+          <HowItWorks />
+          <Screenshots />
+        </GalleryProvider>
+        <VirtualRelationships />
+        <FileConnections />
+        <Dashboards />
+        <TimeHandling />
+        <AtScale />
+        <SecuritySection />
         <ComparisonStrip />
-        <FeaturesGrid />
-        <HowItWorks />
-        <Screenshots />
-      </GalleryProvider>
-      <Dashboards />
-      <TimeHandling />
-      <VirtualRelationships />
-      <AtScale />
-      <SecuritySection />
-      <Quickstart />
-      <CallToActionBand />
+        <Quickstart />
+        <CallToActionBand />
+      </main>
       <Footer />
     </div>
   );

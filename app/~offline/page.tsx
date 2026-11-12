@@ -14,7 +14,7 @@ export default function OfflinePage() {
       </div>
       <button
         onClick={() => location.reload()}
-        className="mt-2 rounded-lg bg-emerald-500 hover:bg-emerald-400 px-4 py-2 text-xs font-bold text-gray-950 transition-all"
+        className="btn btn-sm btn-primary mt-2"
       >
         Retry
       </button>

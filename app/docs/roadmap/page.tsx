@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import Prose from '@/components/Prose';
+import { Prose } from '@/components/prose';
 import { GITHUB_URL } from '@/lib/site';
 
 export const metadata: Metadata = {
@@ -31,7 +31,7 @@ export default function RoadmapPage() {
         <li>Fleet-scale bounds throughout: scoped-only introspection, an enforced row limit on every query, bounded fan-out, a column-bounded catalog cache with stale-while-revalidate, idle connection-pool eviction, and paged, server-searched pickers.</li>
         <li>CSV/JSON export honoring the current filters, sort, search, and column selection, with foreign keys optionally exported as a resolved &quot;(label)&quot; companion column. A result under the row-limit threshold streams straight back; anything larger becomes a background job you can leave running and cancel, tracked in Settings → Exports until you come back for it.</li>
         <li>Role-based access (admin/editor/viewer), per-connection grants, and an audit log with tiered retention.</li>
-        <li>Credentials encrypted at rest (AES-256-GCM); all Lizard state lives in its own local SQLite file.</li>
+        <li>Credentials encrypted at rest (AES-256-GCM); all Lizard state lives in its own metadata database (SQLite or Postgres).</li>
       </ul>
       <p>
         See <Link href="/docs/features">Features</Link> for the full detail on each of these.

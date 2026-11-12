@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import Prose from '@/components/Prose';
+import { Prose } from '@/components/prose';
 
 export const metadata: Metadata = {
   title: 'Architecture',
@@ -29,9 +29,9 @@ export default function ArchitecturePage() {
         <li><strong>App framework:</strong> Next.js (App Router) + TypeScript.</li>
         <li><strong>DB driver / query builder:</strong> <code>pg</code> and Kysely — table/column identifiers are only known at runtime, so a compile-time ORM doesn't fit the query layer.</li>
         <li><strong>Federation engine:</strong> DuckDB embedded in the Node process. It <code>ATTACH</code>es multiple databases read-only (Postgres and MySQL natively, MongoDB via DuckDB's community <code>mongo</code> extension) and runs one SQL statement across them, with filters pushed down. Nothing is installed on your databases.</li>
-        <li><strong>AI:</strong> Anthropic (Claude) by default; OpenAI and Google also supported. The model gets a cheap, name-only schema skeleton plus tools it calls on demand — never a full schema dump.</li>
+        <li><strong>AI:</strong> any provider via <code>LIZARD_LLM_URL</code>: Anthropic, OpenAI, Gemini, DeepSeek, or an OpenAI-compatible gateway. The model gets a cheap, name-only schema skeleton plus tools it calls on demand — never a full schema dump.</li>
         <li><strong>Charts:</strong> auto-picked from the result's own shape — time series, comparison, single value, or a plain table when nothing's chartable.</li>
-        <li><strong>Metadata store:</strong> a local SQLite file holding connections, overrides, virtual relationships, dashboards, and the audit log. Lizard never writes to the target database's schema.</li>
+        <li><strong>Metadata store:</strong> SQLite by default or Postgres for multiple instances, holding connections, overrides, virtual relationships, dashboards, and the audit log. Lizard never writes to the target database's schema.</li>
       </ul>
 
       <h2>The layer between the app and your databases</h2>
