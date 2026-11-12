@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from 'next';
 import { SerwistProvider } from '@serwist/turbopack/react';
+import NextTopLoader from 'nextjs-toploader';
 import './globals.css';
 
 const siteUrl = 'https://lizardconsole.github.io';
@@ -7,7 +8,7 @@ const siteUrl = 'https://lizardconsole.github.io';
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: 'Lizard — AI-native, zero-config data console',
+    default: 'Lizard — the data console for your database fleet',
     template: '%s · Lizard',
   },
   description:
@@ -22,21 +23,21 @@ export const metadata: Metadata = {
     'MongoDB admin UI',
     'AI SQL assistant',
     'natural language database query',
-    'open source admin panel',
+    'self-hosted data console',
     'multi-database console',
   ],
-  authors: [{ name: 'Lizard contributors', url: 'https://github.com/lizardconsole/lizard' }],
+  authors: [{ name: 'Lizard Console', url: 'https://github.com/lizardconsole/lizard' }],
   openGraph: {
     type: 'website',
     url: siteUrl,
     siteName: 'Lizard',
-    title: 'Lizard — AI-native, zero-config data console',
+    title: 'Lizard — the data console for your database fleet',
     description:
       'Auto-generated CRUD UI, natural-language querying, and prompt-driven charts across your Postgres, MySQL, and MongoDB fleet. 100% self-hosted.',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Lizard — AI-native, zero-config data console',
+    title: 'Lizard — the data console for your database fleet',
     description:
       'Auto-generated CRUD UI, natural-language querying, and prompt-driven charts across your Postgres, MySQL, and MongoDB fleet. 100% self-hosted.',
   },
@@ -45,7 +46,7 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   themeColor: [
     { media: '(prefers-color-scheme: light)', color: '#ffffff' },
-    { media: '(prefers-color-scheme: dark)', color: '#030712' },
+    { media: '(prefers-color-scheme: dark)', color: '#0b0b0d' },
   ],
 };
 
@@ -63,14 +64,13 @@ const themeInitScript = `
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" data-scroll-behavior="smooth" suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
       </head>
-      <body className="min-h-screen bg-bg-primary text-text-primary font-sans antialiased overflow-x-hidden selection:bg-emerald-500/20 selection:text-emerald-300">
-        {/* Registers the offline/app-shell service worker (app/sw.ts) — a
-            no-op in development so an active SW can't shadow live-reloaded
-            code while iterating. */}
+      <body className="min-h-screen bg-bg-primary text-text-primary font-sans antialiased overflow-x-clip">
+        <NextTopLoader color="var(--accent)" height={2} showSpinner={false} shadow={false} />
+
         <SerwistProvider swUrl="/sw.js" disable={process.env.NODE_ENV === 'development'}>
           {children}
         </SerwistProvider>

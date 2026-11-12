@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import Prose from '@/components/Prose';
+import { Prose } from '@/components/prose';
 
 export const metadata: Metadata = {
   title: 'Security Model',

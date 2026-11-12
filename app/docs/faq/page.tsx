@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import Prose from '@/components/Prose';
+import { Prose } from '@/components/prose';
 
 export const metadata: Metadata = {
   title: 'FAQ',
@@ -22,15 +22,16 @@ export default function FaqPage() {
       <h3>Does Lizard modify my database schema?</h3>
       <p>
         No. Lizard never issues DDL against your databases and never writes anything into them. All of its
-        own state — connections, overrides, virtual relationships, dashboards, the audit log — lives in a
-        local SQLite file it owns.
+        own state — connections, overrides, virtual relationships, dashboards, the audit log — lives in
+        its own metadata database: a local SQLite file by default, or a Postgres database you point it at.
       </p>
 
       <h3>Do I need an AI provider API key to use Lizard?</h3>
       <p>
         <code>LIZARD_ENCRYPTION_KEY</code> is the only strictly required environment variable — it encrypts
-        stored database passwords and Lizard refuses to start without it. An AI provider key
-        (<code>ANTHROPIC_API_KEY</code> by default, or OpenAI/Google) enables natural-language querying and
+        stored database passwords and Lizard refuses to start without it. Setting{' '}
+        <code>LIZARD_LLM_URL</code> (Anthropic, OpenAI, Gemini, DeepSeek or any compatible gateway, see{' '}
+        <Link href="/docs/integrations/llm">LLM providers</Link>) enables natural-language querying and
         prompt-driven charts specifically; it doesn't gate browsing or CRUD.
       </p>
 
@@ -60,7 +61,7 @@ export default function FaqPage() {
 
       <h3>What license is Lizard released under?</h3>
       <p>
-        Lizard&apos;s source is public on GitHub — check the repository for the current license and terms.
+        Lizard is open source under the MIT licence. See <Link href="/docs/license">Licence</Link>.
       </p>
     </Prose>
   );

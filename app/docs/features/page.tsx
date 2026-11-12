@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import Prose from '@/components/Prose';
+import { Prose } from '@/components/prose';
 
 export const metadata: Metadata = {
   title: 'Features',
@@ -21,7 +21,7 @@ export default function FeaturesPage() {
       <ul>
         <li><strong>Postgres, MySQL, and MongoDB</strong> side by side in one console, mixed freely across services.</li>
         <li><strong>Two roles per connection</strong> — a read role and a write role, with separate credentials. Analytics, AI, and charts only ever get the read one.</li>
-        <li><strong>Credentials encrypted at rest</strong> (AES-256-GCM) in Lizard&apos;s own SQLite file. Nothing is written to your databases.</li>
+        <li><strong>Credentials encrypted at rest</strong> (AES-256-GCM) in Lizard&apos;s own metadata database. Nothing is written to your databases.</li>
         <li><strong>Searchable, paged pickers</strong> — every place you choose a connection is a combobox that searches server-side, because a fleet has more connections than a dropdown can hold.</li>
       </ul>
 

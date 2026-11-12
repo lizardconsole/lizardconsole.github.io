@@ -1,66 +1,99 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap');
 @import "tailwindcss";
 
 :root {
   --bg-primary: #ffffff;
-  --bg-secondary: #f9fafb; /* gray-50 */
-  --bg-tertiary: #f3f4f6; /* gray-100 */
-  --text-primary: #111827; /* gray-900 */
-  --text-secondary: #4b5563; /* gray-600 */
-  --text-muted: #9ca3af; /* gray-400 */
-  --border-primary: #e5e7eb; /* gray-200 */
-  --border-secondary: #f3f4f6; /* gray-100 */
-  --glow-opacity: 0.05;
-  /* Brand accent — emerald-700, readable at ~4.8:1 on a white page bg.
-     emerald-400 (the dark-theme accent) fails contrast on light backgrounds. */
-  --accent: #047857;
-  --accent-soft: rgb(4 120 87 / 8%);
-  --accent-soft-border: rgb(4 120 87 / 25%);
+  --bg-secondary: #fafafa;
+  --bg-tertiary: #f4f4f5;
+  --surface: #ffffff;
+  --text-primary: #131316;
+  --text-secondary: #5e5f6e;
+  --text-muted: #9394a1;
+  --border-primary: #e9e9ec;
+  --border-secondary: #f1f1f3;
+  --border-strong: #d9d9de;
+
+  --accent: #0d8a5f;
+  --accent-soft: rgb(13 138 95 / 7%);
+  --accent-soft-border: rgb(13 138 95 / 22%);
+
+  --btn-bg: #131316;
+  --btn-fg: #ffffff;
+  --btn-hover: #2f3037;
+
+  --shadow-card: 0 0 0 1px rgb(19 19 22 / 6%), 0 1px 2px rgb(19 19 22 / 4%), 0 4px 12px -4px rgb(19 19 22 / 6%);
+  --shadow-raised: 0 0 0 1px rgb(19 19 22 / 6%), 0 2px 4px rgb(19 19 22 / 4%), 0 24px 48px -16px rgb(19 19 22 / 18%);
+  --shadow-btn: 0 0 0 1px rgb(19 19 22 / 100%), inset 0 1px 0 rgb(255 255 255 / 12%), 0 1px 2px rgb(19 19 22 / 20%);
+  --shadow-btn-secondary: 0 0 0 1px rgb(19 19 22 / 8%), 0 1px 2px rgb(19 19 22 / 6%);
+  --grid-line: rgb(19 19 22 / 5%);
 }
 
 :root.dark {
-  --bg-primary: #030712; /* gray-950 */
-  --bg-secondary: #0b0f19; /* gray-900/60ish */
-  --bg-tertiary: #111827; /* gray-900 */
-  --text-primary: #f3f4f6; /* gray-100 */
-  --text-secondary: #9ca3af; /* gray-400 */
-  --text-muted: #6b7280; /* gray-500 */
-  --border-primary: #1f2937; /* gray-800 */
-  --border-secondary: #111827; /* gray-900 */
-  --glow-opacity: 0.15;
-  --accent: #34d399; /* emerald-400 */
-  --accent-soft: rgb(6 78 59 / 40%); /* emerald-950/40 */
-  --accent-soft-border: rgb(6 95 70 / 50%); /* emerald-900/50 */
+  --bg-primary: #0b0b0d;
+  --bg-secondary: #111114;
+  --bg-tertiary: #18181c;
+  --surface: #131317;
+  --text-primary: #ededef;
+  --text-secondary: #a0a0ab;
+  --text-muted: #6c6c77;
+  --border-primary: rgb(255 255 255 / 8%);
+  --border-secondary: rgb(255 255 255 / 5%);
+  --border-strong: rgb(255 255 255 / 14%);
+
+  --accent: #3fcf8e;
+  --accent-soft: rgb(63 207 142 / 9%);
+  --accent-soft-border: rgb(63 207 142 / 24%);
+
+  --btn-bg: #ededef;
+  --btn-fg: #0b0b0d;
+  --btn-hover: #ffffff;
+
+  --shadow-card: 0 0 0 1px rgb(255 255 255 / 7%), 0 1px 2px rgb(0 0 0 / 40%);
+  --shadow-raised: 0 0 0 1px rgb(255 255 255 / 8%), 0 24px 48px -16px rgb(0 0 0 / 70%);
+  --shadow-btn: 0 0 0 1px rgb(255 255 255 / 100%), 0 1px 2px rgb(0 0 0 / 40%);
+  --shadow-btn-secondary: 0 0 0 1px rgb(255 255 255 / 10%), 0 1px 2px rgb(0 0 0 / 40%);
+  --grid-line: rgb(255 255 255 / 4%);
 }
 
 @theme {
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
-  --font-display: "Space Grotesk", sans-serif;
-  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+  --font-sans: "Geist", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-display: "Geist", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
 
   --color-bg-primary: var(--bg-primary);
   --color-bg-secondary: var(--bg-secondary);
   --color-bg-tertiary: var(--bg-tertiary);
+  --color-surface: var(--surface);
   --color-text-primary: var(--text-primary);
   --color-text-secondary: var(--text-secondary);
   --color-text-muted: var(--text-muted);
   --color-border-primary: var(--border-primary);
   --color-border-secondary: var(--border-secondary);
+  --color-border-strong: var(--border-strong);
   --color-accent: var(--accent);
   --color-accent-soft: var(--accent-soft);
   --color-accent-soft-border: var(--accent-soft-border);
 }
 
 @layer base {
+  html {
+    scroll-padding-top: 5rem;
+    scroll-behavior: smooth;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
   body {
     background-color: var(--bg-primary);
     color: var(--text-primary);
     font-family: var(--font-sans);
+    font-feature-settings: "ss01", "cv11";
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    transition-property: background-color, color, border-color;
-    transition-duration: 200ms;
-    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   ::selection {
@@ -69,23 +102,6 @@
   }
 }
 
-/* Custom glow animations and scrollbars */
-.glow-mesh {
-  background-image:
-    radial-gradient(at 0% 0%, hsla(160, 84%, 39%, calc(var(--glow-opacity) * 1.0)) 0px, transparent 50%),
-    radial-gradient(at 100% 0%, hsla(217, 91%, 60%, calc(var(--glow-opacity) * 0.8)) 0px, transparent 50%),
-    radial-gradient(at 50% 100%, hsla(263, 90%, 50%, calc(var(--glow-opacity) * 0.53)) 0px, transparent 50%);
-}
-
-.glow-emerald {
-  box-shadow: 0 0 50px -12px rgba(16, 185, 129, var(--glow-opacity));
-}
-
-.glow-blue {
-  box-shadow: 0 0 50px -12px rgba(59, 130, 246, var(--glow-opacity));
-}
-
-/* Smooth hidden scrollbar but scrollable */
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
@@ -95,48 +111,107 @@
 }
 
 @layer components {
+    .card {
+    background-color: var(--surface);
+    border-radius: 0.875rem;
+    box-shadow: var(--shadow-card);
+  }
+  .card-raised {
+    background-color: var(--surface);
+    border-radius: 1rem;
+    box-shadow: var(--shadow-raised);
+  }
+
+    .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg px-4 h-10 text-sm font-medium transition-[background-color,box-shadow,color] duration-150 cursor-pointer select-none;
+  }
+  .btn-sm {
+    @apply h-8 px-3 text-[13px] rounded-md;
+  }
+  .btn-primary {
+    background-color: var(--btn-bg);
+    color: var(--btn-fg);
+    box-shadow: var(--shadow-btn);
+  }
+  .btn-primary:hover {
+    background-color: var(--btn-hover);
+  }
+  .btn-secondary {
+    background-color: var(--surface);
+    color: var(--text-primary);
+    box-shadow: var(--shadow-btn-secondary);
+  }
+  .btn-secondary:hover {
+    background-color: var(--bg-secondary);
+  }
+
+    .eyebrow {
+    @apply inline-flex items-center gap-2 text-[13px] font-medium text-text-secondary;
+  }
+  .eyebrow::before {
+    content: "";
+    @apply h-1.5 w-1.5 rounded-full bg-accent;
+  }
+
+  .icon-tile {
+    @apply flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-surface text-text-primary;
+    box-shadow: var(--shadow-btn-secondary);
+  }
+
+  .kbd {
+    @apply font-mono text-[12px] rounded-md bg-bg-tertiary px-1.5 py-0.5 text-text-primary;
+  }
+
+    .bg-grid {
+    background-image:
+      linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+    background-size: 48px 48px;
+    mask-image: radial-gradient(ellipse 70% 60% at 50% 0%, #000 40%, transparent 100%);
+  }
+
   .badge-accent {
     @apply text-accent bg-accent-soft border-accent-soft-border;
   }
 
-  .prose-lizard h1 {
-    @apply font-display text-3xl sm:text-4xl font-extrabold tracking-tight text-text-primary mb-4;
+    .prose-lizard h1 {
+    @apply text-3xl sm:text-4xl font-semibold tracking-[-0.03em] text-text-primary mb-4;
   }
   .prose-lizard h2 {
-    @apply font-display text-xl sm:text-2xl font-bold text-text-primary mt-10 mb-4 pt-6 border-t border-border-primary;
+    @apply text-xl sm:text-2xl font-semibold tracking-[-0.02em] text-text-primary mt-12 mb-4 pt-8 border-t border-border-primary;
   }
   .prose-lizard h2:first-child {
     @apply mt-0 pt-0 border-t-0;
   }
   .prose-lizard h3 {
-    @apply font-display text-base font-bold text-text-primary mt-6 mb-2;
+    @apply text-base font-semibold text-text-primary mt-8 mb-2;
   }
   .prose-lizard p {
-    @apply text-sm text-text-secondary leading-relaxed mb-4;
+    @apply text-[15px] text-text-secondary leading-7 mb-4;
   }
   .prose-lizard ul {
-    @apply list-disc pl-5 space-y-2 text-sm text-text-secondary mb-4;
+    @apply list-disc pl-5 space-y-2 text-[15px] leading-7 text-text-secondary mb-4 marker:text-text-muted;
   }
   .prose-lizard li strong {
-    @apply text-text-primary;
+    @apply text-text-primary font-medium;
   }
   .prose-lizard a {
-    @apply text-emerald-400 hover:underline;
+    @apply text-text-primary font-medium underline decoration-border-strong underline-offset-4 hover:decoration-text-primary;
   }
   .prose-lizard code {
-    @apply font-mono text-[12px] bg-bg-secondary px-1.5 py-0.5 rounded border border-border-primary text-emerald-400;
+    @apply font-mono text-[13px] bg-bg-tertiary px-1.5 py-0.5 rounded-md text-text-primary;
   }
   .prose-lizard pre {
-    @apply font-mono text-[11px] leading-relaxed bg-bg-secondary border border-border-primary rounded-xl p-4 overflow-x-auto mb-6 text-text-primary;
+    @apply font-mono text-[13px] leading-relaxed bg-bg-secondary border border-border-primary rounded-xl p-4 overflow-x-auto mb-6 text-text-primary;
   }
   .prose-lizard pre code {
-    @apply bg-transparent border-0 p-0 text-inherit;
+    @apply bg-transparent p-0 text-inherit;
   }
   .prose-lizard table {
-    @apply w-full text-xs font-mono border border-border-primary rounded-lg overflow-hidden mb-6;
+    @apply w-full text-[13px] border border-border-primary rounded-lg overflow-hidden mb-6;
   }
   .prose-lizard th {
-    @apply bg-bg-tertiary text-text-secondary text-left px-3 py-2 border-b border-border-primary;
+    @apply bg-bg-secondary text-text-primary font-medium text-left px-3 py-2 border-b border-border-primary;
   }
   .prose-lizard td {
     @apply px-3 py-2 border-b border-border-primary text-text-secondary align-top;
