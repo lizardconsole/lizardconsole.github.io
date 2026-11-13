@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next';
 import { SerwistProvider } from '@serwist/turbopack/react';
 import NextTopLoader from 'nextjs-toploader';
+import { GoogleTagManager } from '@next/third-parties/google';
 import './globals.css';
 
 const siteUrl = 'https://lizardconsole.github.io';
@@ -68,6 +69,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
       </head>
+      <GoogleTagManager gtmId="GTM-5PPP23VL" />
       <body className="min-h-screen bg-bg-primary text-text-primary font-sans antialiased overflow-x-clip">
         <NextTopLoader color="var(--accent)" height={2} showSpinner={false} shadow={false} />
 
