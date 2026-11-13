@@ -37,7 +37,7 @@ export const metadata: Metadata = {
       'Auto-generated CRUD UI, natural-language querying, and prompt-driven charts across your Postgres, MySQL, and MongoDB fleet. 100% self-hosted.',
   },
   verification: {
-    google: 'USyULSsvHuxohG0GGTBDxH9jl6z3BHmEOteMAM68Zls',
+    google: 'v-4ogWRbsHeReZuqSLqwLtFWgIMoKNGUMmsiBlCvl-Q',
   },
   twitter: {
     card: 'summary_large_image',
