@@ -4,13 +4,13 @@ export const dynamic = 'force-static';
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: 'Lizard',
+    name: 'Lizard Console',
     short_name: 'Lizard',
-    description: 'AI-native, zero-config data console for your Postgres, MySQL, and MongoDB fleet',
+    description: 'One console for every Postgres, MySQL and MongoDB database you run',
     start_url: '/',
     display: 'standalone',
-    background_color: '#030712',
-    theme_color: '#0d9488',
+    background_color: '#ffffff',
+    theme_color: '#ffffff',
     icons: [
       { src: '/icon-64.png', sizes: '64x64', type: 'image/png' },
       { src: '/icon-128.png', sizes: '128x128', type: 'image/png' },

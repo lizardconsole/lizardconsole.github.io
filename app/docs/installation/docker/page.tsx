@@ -19,24 +19,40 @@ export default function DockerPage() {
         only the standalone build, no source.
       </p>
 
+      <h2>Before you start: the encryption key</h2>
+      <p>
+        Generate <code>LIZARD_ENCRYPTION_KEY</code> once, outside the container:
+      </p>
+      <pre>
+        <code>openssl rand -base64 32</code>
+      </pre>
+      <p>
+        Save it in a <code>.env</code> file next to where you run Docker, and keep a copy in your secret
+        store:
+      </p>
+      <pre>
+        <code>{`LIZARD_ENCRYPTION_KEY=<the generated key>
+LIZARD_LLM_URL=https://:sk-ant-…@api.anthropic.com/v1?model=claude-sonnet-5`}</code>
+      </pre>
+      <p>
+        Don’t generate the key inline in the run command, as in{' '}
+        <code>-e LIZARD_ENCRYPTION_KEY=$(openssl rand -base64 32)</code>. Every restart or redeploy would then
+        get a new key, and passwords saved under the old one could no longer be decrypted.
+      </p>
+
       <h2>Minimal: SQLite metadata, in-memory DuckDB</h2>
       <p>
-        The defaults need nothing but the encryption key. Metadata goes to{' '}
-        <code>/app/data/lizard.sqlite</code> and federated queries run on an embedded, in-memory DuckDB.
-        Mount a volume on <code>/app/data</code> so state survives container restarts.
+        The defaults need nothing but the key. Metadata goes to <code>/app/data/lizard.sqlite</code> and
+        federated queries run on an embedded, in-memory DuckDB. Mount a volume on <code>/app/data</code> so
+        state survives container restarts.
       </p>
       <pre>
         <code>{`docker run -d --name lizard \\
   -p ${APP_PORT}:${APP_PORT} \\
-  -e LIZARD_ENCRYPTION_KEY=$(openssl rand -base64 32) \\
-  -e LIZARD_LLM_URL='https://:sk-ant-…@api.anthropic.com/v1?model=claude-sonnet-5' \\
+  --env-file .env \\
   -v lizard_data:/app/data \\
   ${DOCKER_IMAGE}`}</code>
       </pre>
-      <p>
-        Generate the key once and store it. Running <code>openssl rand</code> inline on every start would
-        give the container a new key and make every stored password unreadable.
-      </p>
 
       <h2>Postgres metadata</h2>
       <p>

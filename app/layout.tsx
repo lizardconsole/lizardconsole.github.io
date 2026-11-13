@@ -8,14 +8,14 @@ const siteUrl = 'https://lizardconsole.github.io';
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: 'Lizard — the data console for your database fleet',
-    template: '%s · Lizard',
+    default: 'Lizard Console — one console for every database you run',
+    template: '%s · Lizard Console',
   },
   description:
-    'Point Lizard at one or many Postgres, MySQL, and MongoDB databases and get an auto-generated CRUD UI, natural-language querying, and prompt-driven charts across the fleet — 100% self-hosted, zero schema pollution.',
-  applicationName: 'Lizard',
+    'Point Lizard Console at one or many Postgres, MySQL, and MongoDB databases and get an auto-generated CRUD UI, natural-language querying, and prompt-driven charts across the fleet — 100% self-hosted, zero schema pollution.',
+  applicationName: 'Lizard Console',
   keywords: [
-    'Lizard',
+    'Lizard Console',
     'database admin console',
     'self-hosted admin panel',
     'Postgres admin UI',
@@ -30,14 +30,14 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     url: siteUrl,
-    siteName: 'Lizard',
-    title: 'Lizard — the data console for your database fleet',
+    siteName: 'Lizard Console',
+    title: 'Lizard Console — one console for every database you run',
     description:
       'Auto-generated CRUD UI, natural-language querying, and prompt-driven charts across your Postgres, MySQL, and MongoDB fleet. 100% self-hosted.',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Lizard — the data console for your database fleet',
+    title: 'Lizard Console — one console for every database you run',
     description:
       'Auto-generated CRUD UI, natural-language querying, and prompt-driven charts across your Postgres, MySQL, and MongoDB fleet. 100% self-hosted.',
   },

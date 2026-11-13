@@ -5,38 +5,35 @@ import { Copy, Check } from 'lucide-react';
 import { DOCKER_IMAGE, APP_PORT } from '@/lib/site';
 import { SectionHeader } from './section-header';
 
-const dockerCode = `docker run -p ${APP_PORT}:${APP_PORT} \\
-  -e LIZARD_ENCRYPTION_KEY=$(openssl rand -base64 32) \\
-  -e LIZARD_LLM_URL='https://:sk-ant-…@api.anthropic.com/v1?model=claude-sonnet-5' \\
+const envFile = `openssl rand -base64 32
+
+cat > .env <<'EOF'
+LIZARD_ENCRYPTION_KEY=<paste the key printed above>
+LIZARD_LLM_URL=https://:sk-ant-…@api.anthropic.com/v1?model=claude-sonnet-5
+EOF`;
+
+const dockerCode = `${envFile}
+
+docker run -d -p ${APP_PORT}:${APP_PORT} \\
+  --env-file .env \\
   -v lizard_data:/app/data \\
   ${DOCKER_IMAGE}`;
 
-const npmCode = `npm install
-export LIZARD_ENCRYPTION_KEY=$(openssl rand -base64 32)
-export LIZARD_LLM_URL='https://:sk-ant-…@api.anthropic.com/v1?model=claude-sonnet-5'
-npm run dev   # → http://localhost:${APP_PORT}`;
+const npmCode = `${envFile}
 
-const sqlCode = `CREATE ROLE lizard_read LOGIN PASSWORD '…';
-CREATE ROLE lizard_write LOGIN PASSWORD '…';
-
-GRANT USAGE ON SCHEMA public TO lizard_read, lizard_write;
-GRANT SELECT ON ALL TABLES IN SCHEMA public TO lizard_read;
-GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA public TO lizard_write;
-GRANT USAGE ON ALL SEQUENCES IN SCHEMA public TO lizard_write;
-ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT ON TABLES TO lizard_read;
-ALTER DEFAULT PRIVILEGES IN SCHEMA public
-  GRANT SELECT, INSERT, UPDATE, DELETE ON TABLES TO lizard_write;`;
+npm install
+npm run dev`;
 
 const tabs = [
   { id: 'docker', label: 'Docker', code: dockerCode },
   { id: 'npm', label: 'Node', code: npmCode },
-  { id: 'sql', label: 'Postgres roles', code: sqlCode },
 ] as const;
 
 type TabId = (typeof tabs)[number]['id'];
 
 const notes = [
-  'One required secret. AI turns on when you add an LLM URL.',
+  'Generate the encryption key once and keep it. A new key would lock you out of stored passwords.',
+  'AI turns on when you add an LLM URL.',
   'State lives in a local SQLite file, or your own Postgres for multiple instances.',
   'Anthropic, OpenAI, Gemini, DeepSeek, or any compatible gateway such as Ollama.',
 ];

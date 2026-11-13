@@ -61,7 +61,7 @@ export default function FaqPage() {
 
       <h3>What license is Lizard released under?</h3>
       <p>
-        Lizard is open source under the MIT licence. See <Link href="/docs/license">Licence</Link>.
+        Lizard is open source under the Apache License 2.0. See <Link href="/docs/license">Licence</Link>.
       </p>
     </Prose>
   );

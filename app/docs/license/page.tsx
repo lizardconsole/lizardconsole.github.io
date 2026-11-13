@@ -1,10 +1,10 @@
 import type { Metadata } from 'next';
 import { Prose } from '@/components/prose';
-import { LICENSE_NAME, LICENSE_URL } from '@/lib/site';
+import { LICENSE_URL } from '@/lib/site';
 
 export const metadata: Metadata = {
   title: 'Licence',
-  description: `Lizard is open source under the ${LICENSE_NAME} licence.`,
+  description: 'Lizard is open source under the Apache License 2.0.',
 };
 
 export default function LicensePage() {
@@ -12,8 +12,9 @@ export default function LicensePage() {
     <Prose>
       <h1>Licence</h1>
       <p>
-        Lizard is open source under the <strong>{LICENSE_NAME} licence</strong>. The full text is in the{' '}
-        <a href={LICENSE_URL} target="_blank" rel="noreferrer">LICENSE file</a> in the repository.
+        Lizard is open source under the <strong>Apache License 2.0</strong>. The full text is in the{' '}
+        <a href={LICENSE_URL} target="_blank" rel="noreferrer">LICENSE file</a> in the repository. Copyright
+        stays with Lizard Console and the individual contributors.
       </p>
 
       <h2>What you can do</h2>
@@ -26,8 +27,28 @@ export default function LicensePage() {
 
       <h2>What the licence asks</h2>
       <ul>
-        <li>Keep the copyright notice and the licence text with any copy or substantial portion of the software.</li>
+        <li>Include a copy of the licence with any copy you redistribute.</li>
+        <li>Keep existing copyright, patent, trademark and attribution notices, including the NOTICE file if there is one.</li>
+        <li>Mark files you changed as modified.</li>
       </ul>
+
+      <h2>Patents</h2>
+      <p>
+        Every contributor grants you a licence to any of their patents that their contribution covers.
+        That grant ends for anyone who sues claiming Lizard infringes a patent.
+      </p>
+
+      <h2>Trademarks</h2>
+      <p>
+        The licence covers the code, not the name. A fork can’t present itself as Lizard or use its name
+        and logo in a way that suggests endorsement.
+      </p>
+
+      <h2>Contributions</h2>
+      <p>
+        Unless stated otherwise, anything you submit for inclusion in Lizard is contributed under the same
+        Apache License 2.0.
+      </p>
 
       <h2>No warranty</h2>
       <p>
@@ -39,7 +60,7 @@ export default function LicensePage() {
       <h2>Third-party components</h2>
       <p>
         Lizard depends on open-source packages, including DuckDB, Next.js and Kysely, each under its own
-        licence. Nothing in the {LICENSE_NAME} licence changes your rights under those.
+        licence. Nothing in the Apache License changes your rights under those.
       </p>
     </Prose>
   );

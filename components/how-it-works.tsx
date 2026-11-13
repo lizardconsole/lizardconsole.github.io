@@ -3,10 +3,13 @@ import { SectionHeader } from './section-header';
 const steps = [
   {
     title: 'Start Lizard',
-    desc: 'One required secret encrypts stored passwords. Add an LLM URL to turn on AI querying with any provider.',
-    code: `export LIZARD_ENCRYPTION_KEY=$(openssl rand -base64 32)
-export LIZARD_LLM_URL='https://:sk-…@api.anthropic.com/v1?model=…'
-npm run dev`,
+    desc: 'Generate an encryption key once and save it in .env, with an LLM URL if you want AI querying. Then start Lizard from that file.',
+    code: `openssl rand -base64 32
+
+LIZARD_ENCRYPTION_KEY=<that key>
+LIZARD_LLM_URL=https://:sk-…@…?model=…
+
+docker run --env-file .env …`,
   },
   {
     title: 'Add your connections',

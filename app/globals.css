@@ -13,17 +13,17 @@
   --border-secondary: #f1f1f3;
   --border-strong: #d9d9de;
 
-  --accent: #0d8a5f;
-  --accent-soft: rgb(13 138 95 / 7%);
-  --accent-soft-border: rgb(13 138 95 / 22%);
+  --accent: #2a7f1c;
+  --accent-soft: rgb(42 127 28 / 8%);
+  --accent-soft-border: rgb(42 127 28 / 24%);
 
-  --btn-bg: #131316;
+  --btn-bg: #2a7f1c;
   --btn-fg: #ffffff;
-  --btn-hover: #2f3037;
+  --btn-hover: #236d16;
 
   --shadow-card: 0 0 0 1px rgb(19 19 22 / 6%), 0 1px 2px rgb(19 19 22 / 4%), 0 4px 12px -4px rgb(19 19 22 / 6%);
   --shadow-raised: 0 0 0 1px rgb(19 19 22 / 6%), 0 2px 4px rgb(19 19 22 / 4%), 0 24px 48px -16px rgb(19 19 22 / 18%);
-  --shadow-btn: 0 0 0 1px rgb(19 19 22 / 100%), inset 0 1px 0 rgb(255 255 255 / 12%), 0 1px 2px rgb(19 19 22 / 20%);
+  --shadow-btn: 0 0 0 1px rgb(30 96 20 / 100%), inset 0 1px 0 rgb(255 255 255 / 16%), 0 1px 2px rgb(19 19 22 / 20%);
   --shadow-btn-secondary: 0 0 0 1px rgb(19 19 22 / 8%), 0 1px 2px rgb(19 19 22 / 6%);
   --grid-line: rgb(19 19 22 / 5%);
 }
@@ -40,17 +40,17 @@
   --border-secondary: rgb(255 255 255 / 5%);
   --border-strong: rgb(255 255 255 / 14%);
 
-  --accent: #3fcf8e;
-  --accent-soft: rgb(63 207 142 / 9%);
-  --accent-soft-border: rgb(63 207 142 / 24%);
+  --accent: #7bd335;
+  --accent-soft: rgb(123 211 53 / 10%);
+  --accent-soft-border: rgb(123 211 53 / 26%);
 
-  --btn-bg: #ededef;
+  --btn-bg: #7bd335;
   --btn-fg: #0b0b0d;
-  --btn-hover: #ffffff;
+  --btn-hover: #8ee04a;
 
   --shadow-card: 0 0 0 1px rgb(255 255 255 / 7%), 0 1px 2px rgb(0 0 0 / 40%);
   --shadow-raised: 0 0 0 1px rgb(255 255 255 / 8%), 0 24px 48px -16px rgb(0 0 0 / 70%);
-  --shadow-btn: 0 0 0 1px rgb(255 255 255 / 100%), 0 1px 2px rgb(0 0 0 / 40%);
+  --shadow-btn: 0 0 0 1px rgb(123 211 53 / 100%), inset 0 1px 0 rgb(255 255 255 / 25%), 0 1px 2px rgb(0 0 0 / 40%);
   --shadow-btn-secondary: 0 0 0 1px rgb(255 255 255 / 10%), 0 1px 2px rgb(0 0 0 / 40%);
   --grid-line: rgb(255 255 255 / 4%);
 }
@@ -99,6 +99,30 @@
   ::selection {
     background-color: var(--accent-soft-border);
     color: var(--text-primary);
+  }
+}
+
+@keyframes logo-caret-blink {
+  0%,
+  45% {
+    opacity: 1;
+  }
+  50%,
+  95% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.logo-caret {
+  animation: logo-caret-blink 1.1s step-end infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .logo-caret {
+    animation: none;
   }
 }
 

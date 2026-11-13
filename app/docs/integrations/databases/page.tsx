@@ -36,28 +36,31 @@ export default function DatabasesPage() {
         match your services.
       </p>
 
+      <h2>Credentials</h2>
+      <p>
+        A connection has read credentials and, optionally, write credentials. Both can be the same
+        database user. Leave the write credentials out and the connection is read-only. AI, chart and
+        browse queries always run with the read credentials, so pointing them at a read-only user is a
+        simple way to tighten things later.
+      </p>
+
       <h2>PostgreSQL</h2>
       <p>
         Every schema in the database is introspected: tables, columns, types, primary and foreign keys,
         enums, defaults and comments. Real foreign keys become readable labels and pickers automatically.
-        See the <Link href="/docs/quickstart">Quickstart</Link> for the two-role grant script.
       </p>
 
       <h2>MySQL</h2>
       <p>
         A MySQL connection is one database. A server hosting several databases registers as several
-        connections, and joins between them go through federation. Create a read-only user for{' '}
-        <code>lizard_read</code> and, if you want edits, a separate user with{' '}
-        <code>SELECT, INSERT, UPDATE, DELETE</code> for <code>lizard_write</code>.
+        connections, and joins between them go through federation.
       </p>
 
       <h2>MongoDB</h2>
       <p>
         MongoDB has no schema to read, so Lizard infers one by sampling documents. Collections get the same
         grid, filters and single-document editing as tables. MongoDB has no SQL dialect of its own, so SQL
-        and AI queries against it always run through DuckDB, even for a single connection. Give{' '}
-        <code>lizard_read</code> the <code>read</code> role and <code>lizard_write</code>{' '}
-        <code>readWrite</code> on the databases you connect.
+        and AI queries against it always run through DuckDB, even for a single connection.
       </p>
 
       <h2>File connections</h2>
@@ -71,10 +74,17 @@ export default function DatabasesPage() {
       <h2>Virtual relationships</h2>
       <p>
         Service databases have no foreign keys between them. Declare one in a table’s Customize panel, for
-        example <code>orders.customer_id → users_service.public.customers.id</code>. It powers cross-database
-        labels and pickers, and it is the only way the AI is allowed to join across connections. It is
-        stored in Lizard’s metadata, never in your databases.
+        example <code>orders.customer_id → users_service.public.customers.id</code>. Relationships work
+        across services <strong>and across engines</strong>: Postgres to Postgres, MySQL to Postgres, or
+        MongoDB to Postgres.
       </p>
+      <ul>
+        <li>Match on several columns at once for composite keys.</li>
+        <li>Pin a column to a fixed value for polymorphic tables, such as <code>subject_type = 'customer'</code>.</li>
+        <li>Linked columns render as readable labels and searchable pickers in the grid.</li>
+        <li>It is the only way the AI is allowed to join across connections; it never guesses a cross-database join.</li>
+        <li>It is stored in Lizard’s metadata, never in your databases.</li>
+      </ul>
     </Prose>
   );
 }

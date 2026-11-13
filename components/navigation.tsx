@@ -2,10 +2,10 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import { Github, Menu, X, Sun, Moon } from 'lucide-react';
 import { GITHUB_URL, GITHUB_REPO } from '@/lib/site';
 import { GitHubStars } from './github-stars';
+import { Logo } from './logo';
 
 const navLinks = [
   { label: 'Features', href: '/#features' },
@@ -52,9 +52,8 @@ export function Navigation() {
     >
       <div className="container mx-auto flex h-16 items-center justify-between px-4 sm:px-6">
         <div className="flex items-center gap-10">
-          <Link href="/" className="flex items-center gap-2">
-            <Image src="/lizard-logo.png" alt="" width={28} height={28} className="h-7 w-7 object-contain" priority />
-            <span className="text-[17px] font-semibold tracking-[-0.02em] text-text-primary">Lizard</span>
+          <Link href="/" className="flex">
+            <Logo priority />
           </Link>
 
           <nav className="hidden md:flex items-center gap-1">

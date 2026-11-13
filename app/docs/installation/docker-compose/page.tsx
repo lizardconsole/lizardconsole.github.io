@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   description: 'Compose files for Lizard on SQLite, on Postgres with Redis, and with a remote DuckDB server.',
 };
 
-const envFile = `LIZARD_ENCRYPTION_KEY=<output of: openssl rand -base64 32>
+const envFile = `LIZARD_ENCRYPTION_KEY=<key generated once with: openssl rand -base64 32>
 LIZARD_LLM_URL=https://:sk-ant-…@api.anthropic.com/v1?model=claude-sonnet-5`;
 
 const sqliteCompose = `services:
@@ -77,6 +77,11 @@ export default function DockerComposePage() {
         Two starting points: a single container on SQLite for one instance, and a stack with Postgres
         metadata and Redis that is ready to scale out. Both read secrets from a <code>.env</code> file next
         to <code>docker-compose.yml</code>.
+      </p>
+      <p>
+        Generate the encryption key once with <code>openssl rand -base64 32</code> and paste the output into{' '}
+        <code>.env</code>. Keep the same key for the life of the deployment: a new one can’t decrypt
+        passwords saved under the old one.
       </p>
       <pre>
         <code>{envFile}</code>

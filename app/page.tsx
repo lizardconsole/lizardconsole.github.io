@@ -19,7 +19,7 @@ import { GITHUB_URL } from '@/lib/site';
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'SoftwareApplication',
-  name: 'Lizard',
+  name: 'Lizard Console',
   description:
     'Self-hosted data console for your Postgres, MySQL and MongoDB fleet: auto-generated CRUD UI, natural-language querying, and dashboards that join across databases.',
   url: 'https://lizardconsole.github.io',

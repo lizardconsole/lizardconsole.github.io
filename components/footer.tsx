@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import Image from 'next/image';
+import { Logo } from './logo';
 import { GITHUB_URL, LICENSE_NAME, LICENSE_URL } from '@/lib/site';
 
 const columns = [
@@ -38,9 +38,8 @@ export function Footer() {
       <div className="container mx-auto px-4 py-14 sm:px-6">
         <div className="grid grid-cols-2 gap-10 md:grid-cols-5">
           <div className="col-span-2">
-            <Link href="/" className="flex items-center gap-2">
-              <Image src="/lizard-logo.png" alt="" width={24} height={24} className="h-6 w-6 object-contain" />
-              <span className="text-[15px] font-semibold tracking-[-0.02em] text-text-primary">Lizard</span>
+            <Link href="/" className="flex w-fit">
+              <Logo size="sm" />
             </Link>
             <p className="mt-4 max-w-xs text-sm leading-6 text-text-secondary">
               The open-source, self-hosted data console for your Postgres, MySQL and MongoDB fleet.
