@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     template: '%s · Lizard Console',
   },
   description:
-    'Point Lizard Console at one or many Postgres, MySQL, and MongoDB databases and get an auto-generated CRUD UI, natural-language querying, and prompt-driven charts across the fleet — 100% self-hosted, zero schema pollution.',
+    'Point Lizard Console at one or many Postgres, MySQL, and MongoDB databases and get an auto-generated CRUD UI, natural-language querying, and prompt-driven charts across the fleet, with cross-database joins powered by DuckDB 2.0 — 100% self-hosted, zero schema pollution.',
   applicationName: 'Lizard Console',
   keywords: [
     'Lizard Console',
@@ -26,6 +26,11 @@ export const metadata: Metadata = {
     'natural language database query',
     'self-hosted data console',
     'multi-database console',
+    'DuckDB',
+    'DuckDB 2.0',
+    'DuckDB federated query',
+    'cross-database SQL',
+    'query CSV and Parquet with SQL',
   ],
   authors: [{ name: 'Lizard Console', url: 'https://github.com/lizardconsole/lizard' }],
   openGraph: {
@@ -72,8 +77,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
       </head>
-      <GoogleTagManager gtmId="GTM-5PPP23VL" />
-      <body className="min-h-screen bg-bg-primary text-text-primary font-sans antialiased overflow-x-clip">
+      <body
+        className="min-h-screen bg-bg-primary text-text-primary font-sans antialiased overflow-x-clip"
+        suppressHydrationWarning
+      >
+        <GoogleTagManager gtmId="GTM-5PPP23VL" />
         <NextTopLoader color="var(--accent)" height={2} showSpinner={false} shadow={false} />
 
         <SerwistProvider swUrl="/sw.js" disable={process.env.NODE_ENV === 'development'}>

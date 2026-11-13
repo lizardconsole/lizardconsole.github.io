@@ -21,7 +21,8 @@ const jsonLd = {
   '@type': 'SoftwareApplication',
   name: 'Lizard Console',
   description:
-    'Self-hosted data console for your Postgres, MySQL and MongoDB fleet: auto-generated CRUD UI, natural-language querying, and dashboards that join across databases.',
+    'Self-hosted data console for your Postgres, MySQL and MongoDB fleet: auto-generated CRUD UI, natural-language querying, and dashboards that join across databases on DuckDB 2.0.',
+  keywords: 'database admin console, DuckDB, DuckDB 2.0, federated SQL, Postgres, MySQL, MongoDB',
   url: 'https://lizardconsole.github.io',
   applicationCategory: 'DeveloperApplication',
   operatingSystem: 'Self-hosted via Node.js or Docker (Linux, macOS, Windows)',

@@ -77,8 +77,18 @@
 
 @layer base {
   html {
-    scroll-padding-top: 5rem;
+    scroll-padding-top: 4rem;
     scroll-behavior: smooth;
+  }
+
+  section[id] {
+    scroll-margin-top: -3.5rem;
+  }
+
+  @media (min-width: 40rem) {
+    section[id] {
+      scroll-margin-top: -5.5rem;
+    }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -191,6 +201,10 @@
       linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
       linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
     background-size: 48px 48px;
+  }
+
+  .bg-grid,
+  .grid-fade {
     mask-image: radial-gradient(ellipse 70% 60% at 50% 0%, #000 40%, transparent 100%);
   }
 

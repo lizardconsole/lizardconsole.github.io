@@ -1,13 +1,14 @@
 'use client';
 
 import Image from 'next/image';
-import { ArrowRight, ArrowUpRight } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { GITHUB_URL, LICENSE_NAME, LICENSE_URL } from '@/lib/site';
 import { useGallery } from './gallery-provider';
+import { GridGlow } from './grid-glow';
 
 const HERO_SHOT = '/screenshots/federated-orders-customers.png';
 
-const engines = ['PostgreSQL', 'MySQL', 'MongoDB', 'CSV · Parquet · XLSX'];
+const engines = ['PostgreSQL', 'MySQL', 'MongoDB', 'CSV · Parquet · XLSX', 'Joins on DuckDB 2.0'];
 
 export function Hero() {
   const gallery = useGallery();
@@ -15,22 +16,23 @@ export function Hero() {
   return (
     <section className="relative -mt-16 pt-16 overflow-hidden">
       <div className="pointer-events-none absolute inset-0 bg-grid" />
+      <GridGlow />
 
       <div className="relative container mx-auto px-4 sm:px-6 pt-20 sm:pt-28">
         <div className="mx-auto max-w-3xl text-center">
-          <a
-            href={LICENSE_URL}
-            target="_blank"
-            rel="noreferrer"
-            className="group inline-flex items-center gap-2 rounded-full bg-surface py-1 pl-1 pr-3 text-[13px] text-text-secondary hover:text-text-primary transition-colors"
-            style={{ boxShadow: 'var(--shadow-btn-secondary)' }}
-          >
-            <span className="rounded-full bg-accent-soft px-2 py-0.5 text-[12px] font-medium text-accent">
-              Open source
-            </span>
-            {LICENSE_NAME} licensed, self-hosted
-            <ArrowUpRight className="h-3.5 w-3.5 text-text-muted group-hover:text-text-primary transition-colors" />
-          </a>
+          <p className="font-mono text-[13px] sm:text-sm text-text-secondary">
+            Open source under{' '}
+            <a
+              href={LICENSE_URL}
+              target="_blank"
+              rel="noreferrer"
+              className="font-medium text-text-primary underline decoration-border-strong underline-offset-4 hover:decoration-text-primary transition-colors"
+            >
+              {LICENSE_NAME}
+            </a>
+            <span className="mx-2 text-text-muted">/</span>
+            runs on your infrastructure
+          </p>
 
           <h1 className="mt-7 text-[40px] leading-[1.05] sm:text-6xl md:text-[68px] font-semibold tracking-[-0.045em] text-text-primary text-balance">
             One console for every database you run

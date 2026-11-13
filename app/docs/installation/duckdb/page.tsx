@@ -3,7 +3,7 @@ import { Prose } from '@/components/prose';
 
 export const metadata: Metadata = {
   title: 'DuckDB engine',
-  description: 'Run federated queries on an embedded in-memory DuckDB, an embedded disk-spilling one, or a remote DuckDB server.',
+  description: 'Run federated queries on DuckDB 2.0: an embedded in-memory DuckDB, an embedded disk-spilling one, or a remote DuckDB server.',
 };
 
 export default function DuckdbPage() {
