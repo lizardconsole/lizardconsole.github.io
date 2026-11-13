@@ -36,6 +36,9 @@ export const metadata: Metadata = {
     description:
       'Auto-generated CRUD UI, natural-language querying, and prompt-driven charts across your Postgres, MySQL, and MongoDB fleet. 100% self-hosted.',
   },
+  verification: {
+    google: 'USyULSsvHuxohG0GGTBDxH9jl6z3BHmEOteMAM68Zls',
+  },
   twitter: {
     card: 'summary_large_image',
     title: 'Lizard Console — one console for every database you run',
