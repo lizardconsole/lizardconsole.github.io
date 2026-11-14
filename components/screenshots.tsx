@@ -1,23 +1,23 @@
-'use client';
+"use client";
 
-import Image from 'next/image';
-import { SectionHeader } from './section-header';
-import { useGallery } from './gallery-provider';
+import Image from "next/image";
+import { SectionHeader } from "./section-header";
+import { useGallery } from "./gallery-provider";
 
 const shots = [
-  { src: '/screenshots/explore-ai.png', title: 'AI query console' },
-  { src: '/screenshots/federated-tickets-customers.png', title: 'MySQL joined to Postgres' },
-  { src: '/screenshots/record-detail.png', title: 'Record detail' },
-  { src: '/screenshots/browse-customers-gallery.png', title: 'Gallery view' },
-  { src: '/screenshots/relationship-graph.png', title: 'Relationship graph' },
-  { src: '/screenshots/explore-sql.png', title: 'SQL editor' },
+  { src: "/screenshots/explore-ai.png", title: "AI query console" },
+  { src: "/screenshots/federated-tickets-customers.png", title: "MySQL joined to Postgres" },
+  { src: "/screenshots/record-detail.png", title: "Record detail" },
+  { src: "/screenshots/browse-customers-gallery.png", title: "Gallery view" },
+  { src: "/screenshots/relationship-graph.png", title: "Relationship graph" },
+  { src: "/screenshots/explore-sql.png", title: "SQL editor" }
 ];
 
 export function Screenshots() {
   const gallery = useGallery();
 
   return (
-    <section id="screenshots" className="py-24 sm:py-32">
+    <section id="screenshots" className="border-t border-border-primary bg-bg-secondary py-24 sm:py-32">
       <div className="container mx-auto px-4 sm:px-6">
         <SectionHeader eyebrow="Product" title="A closer look at the console">
           Real screenshots from a local fleet of five service databases.

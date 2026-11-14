@@ -1,18 +1,18 @@
-import { SectionHeader } from './section-header';
+import { SectionHeader } from "./section-header";
 
 const points = [
   {
-    title: 'A date means the whole day',
-    desc: 'Leave the time blank and “= 1 Jan” matches all of 1 Jan. A range runs from the start of the first day to the end of the last.',
+    title: "A date means the whole day",
+    desc: "Leave the time blank and “= 1 Jan” matches all of 1 Jan. A range runs from the start of the first day to the end of the last."
   },
   {
-    title: 'Your timezone, not the server’s',
-    desc: 'The browser’s zone is validated and applied to the connection session on Postgres, MySQL and DuckDB alike. It’s part of the cache key, too.',
+    title: "Your timezone, not the server’s",
+    desc: "The browser’s zone is validated and applied to the connection session on Postgres, MySQL and DuckDB alike. It’s part of the cache key, too."
   },
   {
-    title: 'Still an index seek',
-    desc: 'Whole-day filters expand to a half-open range rather than DATE(created_at) = …, so the index on the column still gets used.',
-  },
+    title: "Still an index seek",
+    desc: "Whole-day filters expand to a half-open range rather than DATE(created_at) = …, so the index on the column still gets used."
+  }
 ];
 
 export function TimeHandling() {

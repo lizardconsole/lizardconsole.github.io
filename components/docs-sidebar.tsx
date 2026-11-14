@@ -1,47 +1,47 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 export const DOCS_NAV = [
   {
-    title: 'Getting started',
+    title: "Getting started",
     links: [
-      { href: '/docs', label: 'Introduction' },
-      { href: '/docs/quickstart', label: 'Quickstart' },
-      { href: '/docs/features', label: 'Features' },
-    ],
+      { href: "/docs", label: "Introduction" },
+      { href: "/docs/quickstart", label: "Quickstart" },
+      { href: "/docs/features", label: "Features" }
+    ]
   },
   {
-    title: 'Installation',
+    title: "Installation",
     links: [
-      { href: '/docs/installation/docker', label: 'Docker' },
-      { href: '/docs/installation/docker-compose', label: 'Docker Compose' },
-      { href: '/docs/installation/metadata', label: 'Metadata database' },
-      { href: '/docs/installation/duckdb', label: 'DuckDB engine' },
-    ],
+      { href: "/docs/installation/docker", label: "Docker" },
+      { href: "/docs/installation/docker-compose", label: "Docker Compose" },
+      { href: "/docs/installation/metadata", label: "Metadata database" },
+      { href: "/docs/installation/duckdb", label: "DuckDB engine" }
+    ]
   },
   {
-    title: 'Integrations',
+    title: "Integrations",
     links: [
-      { href: '/docs/integrations', label: 'Overview' },
-      { href: '/docs/integrations/databases', label: 'Databases' },
-      { href: '/docs/integrations/llm', label: 'LLM providers' },
-      { href: '/docs/integrations/sso', label: 'Single sign-on' },
-      { href: '/docs/integrations/file-storage', label: 'File storage' },
-      { href: '/docs/integrations/cache', label: 'Cache' },
-    ],
+      { href: "/docs/integrations", label: "Overview" },
+      { href: "/docs/integrations/databases", label: "Databases" },
+      { href: "/docs/integrations/llm", label: "LLM providers" },
+      { href: "/docs/integrations/sso", label: "Single sign-on" },
+      { href: "/docs/integrations/file-storage", label: "File storage" },
+      { href: "/docs/integrations/cache", label: "Cache" }
+    ]
   },
   {
-    title: 'Reference',
+    title: "Reference",
     links: [
-      { href: '/docs/architecture', label: 'Architecture' },
-      { href: '/docs/security', label: 'Security model' },
-      { href: '/docs/roadmap', label: 'Roadmap' },
-      { href: '/docs/faq', label: 'FAQ' },
-      { href: '/docs/license', label: 'Licence' },
-    ],
-  },
+      { href: "/docs/architecture", label: "Architecture" },
+      { href: "/docs/security", label: "Security model" },
+      { href: "/docs/roadmap", label: "Roadmap" },
+      { href: "/docs/faq", label: "FAQ" },
+      { href: "/docs/license", label: "Licence" }
+    ]
+  }
 ];
 
 export function DocsSidebar() {
@@ -60,7 +60,7 @@ export function DocsSidebar() {
                   <Link
                     href={link.href}
                     className={`block rounded-md px-3 py-1.5 text-sm transition-colors ${
-                      active ? 'bg-bg-tertiary font-medium text-text-primary' : 'text-text-secondary hover:text-text-primary'
+                      active ? "bg-bg-tertiary font-medium text-text-primary" : "text-text-secondary hover:text-text-primary"
                     }`}
                   >
                     {link.label}

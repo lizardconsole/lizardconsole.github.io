@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap");
 @import "tailwindcss";
 
 :root {
@@ -145,7 +145,7 @@
 }
 
 @layer components {
-    .card {
+  .card {
     background-color: var(--surface);
     border-radius: 0.875rem;
     box-shadow: var(--shadow-card);
@@ -156,7 +156,7 @@
     box-shadow: var(--shadow-raised);
   }
 
-    .btn {
+  .btn {
     @apply inline-flex items-center justify-center gap-2 rounded-lg px-4 h-10 text-sm font-medium transition-[background-color,box-shadow,color] duration-150 cursor-pointer select-none;
   }
   .btn-sm {
@@ -179,7 +179,7 @@
     background-color: var(--bg-secondary);
   }
 
-    .eyebrow {
+  .eyebrow {
     @apply inline-flex items-center gap-2 text-[13px] font-medium text-text-secondary;
   }
   .eyebrow::before {
@@ -196,10 +196,9 @@
     @apply font-mono text-[12px] rounded-md bg-bg-tertiary px-1.5 py-0.5 text-text-primary;
   }
 
-    .bg-grid {
+  .bg-grid {
     background-image:
-      linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
-      linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+      linear-gradient(to right, var(--grid-line) 1px, transparent 1px), linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
     background-size: 48px 48px;
   }
 
@@ -212,7 +211,7 @@
     @apply text-accent bg-accent-soft border-accent-soft-border;
   }
 
-    .prose-lizard h1 {
+  .prose-lizard h1 {
     @apply text-3xl sm:text-4xl font-semibold tracking-[-0.03em] text-text-primary mb-4;
   }
   .prose-lizard h2 {

@@ -1,28 +1,28 @@
-import { SectionHeader } from './section-header';
+import { SectionHeader } from "./section-header";
 
 const sources = [
-  { db: 'orders_service', engine: 'PostgreSQL', table: 'orders', column: 'customer_id' },
-  { db: 'support_service', engine: 'MySQL', table: 'tickets', column: 'customer_id' },
-  { db: 'events_service', engine: 'MongoDB', table: 'page_views', column: 'customer_id' },
+  { db: "orders_service", engine: "PostgreSQL", table: "orders", column: "customer_id" },
+  { db: "support_service", engine: "MySQL", table: "tickets", column: "customer_id" },
+  { db: "events_service", engine: "MongoDB", table: "page_views", column: "customer_id" }
 ];
 
 const points = [
   {
-    title: 'Across services and engines',
-    desc: 'Link Postgres to Postgres, MySQL to Postgres, or MongoDB to Postgres. Each side stays in its own database.',
+    title: "Across services and engines",
+    desc: "Link Postgres to Postgres, MySQL to Postgres, or MongoDB to Postgres. Each side stays in its own database."
   },
   {
-    title: 'Composite keys and fixed conditions',
-    desc: 'Match on several columns at once, or pin a column to a constant for polymorphic tables like subject_type = \'customer\'.',
+    title: "Composite keys and fixed conditions",
+    desc: "Match on several columns at once, or pin a column to a constant for polymorphic tables like subject_type = 'customer'."
   },
   {
-    title: 'The only way the AI joins across databases',
-    desc: 'It never guesses a cross-database join from column names. A declared relationship is required.',
+    title: "The only way the AI joins across databases",
+    desc: "It never guesses a cross-database join from column names. A declared relationship is required."
   },
   {
-    title: 'Nothing written to your databases',
-    desc: 'Relationships live in Lizard’s own metadata store. No constraints, no DDL.',
-  },
+    title: "Nothing written to your databases",
+    desc: "Relationships live in Lizard’s own metadata store. No constraints, no DDL."
+  }
 ];
 
 function SourceNode({ db, engine, table, column }: (typeof sources)[number]) {
@@ -42,12 +42,12 @@ function SourceNode({ db, engine, table, column }: (typeof sources)[number]) {
 
 export function VirtualRelationships() {
   return (
-    <section id="relationships" className="border-t border-border-primary bg-bg-secondary py-24 sm:py-32">
+    <section id="relationships" className="border-t border-border-primary py-24 sm:py-32">
       <div className="container mx-auto grid grid-cols-1 items-center gap-14 px-4 sm:px-6 lg:grid-cols-2">
         <div>
           <SectionHeader eyebrow="Virtual relationships" title="Foreign keys across services and database engines">
-            Microservice databases can’t reference each other, let alone across engines. Declare the link
-            once in a table’s Customize panel and Lizard uses it for joins, pickers, AI queries and charts.
+            Microservice databases can’t reference each other, let alone across engines. Declare the link once in a table’s Customize panel
+            and Lizard uses it for joins, pickers, AI queries and charts.
           </SectionHeader>
 
           <dl className="mt-10 space-y-6">

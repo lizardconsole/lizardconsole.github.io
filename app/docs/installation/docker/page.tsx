@@ -1,11 +1,11 @@
-import type { Metadata } from 'next';
-import Link from 'next/link';
-import { Prose } from '@/components/prose';
-import { DOCKER_IMAGE, APP_PORT } from '@/lib/site';
+import type { Metadata } from "next";
+import Link from "next/link";
+import { Prose } from "@/components/prose";
+import { DOCKER_IMAGE, APP_PORT } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: 'Docker',
-  description: 'Run the Lizard container image with SQLite or Postgres metadata and an in-memory or remote DuckDB engine.',
+  title: "Docker",
+  description: "Run the Lizard container image with SQLite or Postgres metadata and an in-memory or remote DuckDB engine."
 };
 
 export default function DockerPage() {
@@ -13,10 +13,9 @@ export default function DockerPage() {
     <Prose>
       <h1>Docker</h1>
       <p>
-        Lizard ships as a multi-arch image (<code>linux/amd64</code> and <code>linux/arm64</code>) at{' '}
-        <code>{DOCKER_IMAGE}</code>. It listens on port <code>{APP_PORT}</code>, keeps its state in{' '}
-        <code>/app/data</code>, and exposes a health check at <code>/api/health</code>. The image contains
-        only the standalone build, no source.
+        Lizard ships as a multi-arch image (<code>linux/amd64</code> and <code>linux/arm64</code>) at <code>{DOCKER_IMAGE}</code>. It
+        listens on port <code>{APP_PORT}</code>, keeps its state in <code>/app/data</code>, and exposes a health check at{" "}
+        <code>/api/health</code>. The image contains only the standalone build, no source.
       </p>
 
       <h2>Before you start: the encryption key</h2>
@@ -27,24 +26,21 @@ export default function DockerPage() {
         <code>openssl rand -base64 32</code>
       </pre>
       <p>
-        Save it in a <code>.env</code> file next to where you run Docker, and keep a copy in your secret
-        store:
+        Save it in a <code>.env</code> file next to where you run Docker, and keep a copy in your secret store:
       </p>
       <pre>
         <code>{`LIZARD_ENCRYPTION_KEY=<the generated key>
 LIZARD_LLM_URL=https://:sk-ant-…@api.anthropic.com/v1?model=claude-sonnet-5`}</code>
       </pre>
       <p>
-        Don’t generate the key inline in the run command, as in{' '}
-        <code>-e LIZARD_ENCRYPTION_KEY=$(openssl rand -base64 32)</code>. Every restart or redeploy would then
-        get a new key, and passwords saved under the old one could no longer be decrypted.
+        Don’t generate the key inline in the run command, as in <code>-e LIZARD_ENCRYPTION_KEY=$(openssl rand -base64 32)</code>. Every
+        restart or redeploy would then get a new key, and passwords saved under the old one could no longer be decrypted.
       </p>
 
       <h2>Minimal: SQLite metadata, in-memory DuckDB</h2>
       <p>
-        The defaults need nothing but the key. Metadata goes to <code>/app/data/lizard.sqlite</code> and
-        federated queries run on an embedded, in-memory DuckDB. Mount a volume on <code>/app/data</code> so
-        state survives container restarts.
+        The defaults need nothing but the key. Metadata goes to <code>/app/data/lizard.sqlite</code> and federated queries run on an
+        embedded, in-memory DuckDB. Mount a volume on <code>/app/data</code> so state survives container restarts.
       </p>
       <pre>
         <code>{`docker run -d --name lizard \\
@@ -56,9 +52,8 @@ LIZARD_LLM_URL=https://:sk-ant-…@api.anthropic.com/v1?model=claude-sonnet-5`}<
 
       <h2>Postgres metadata</h2>
       <p>
-        Point <code>LIZARD_METADATA_URL</code> at a Postgres database whose user can create tables. Tables
-        are created and migrated at startup. Use this when you run more than one Lizard instance; see{' '}
-        <Link href="/docs/installation/metadata">Metadata database</Link>.
+        Point <code>LIZARD_METADATA_URL</code> at a Postgres database whose user can create tables. Tables are created and migrated at
+        startup. Use this when you run more than one Lizard instance; see <Link href="/docs/installation/metadata">Metadata database</Link>.
       </p>
       <pre>
         <code>{`docker run -d --name lizard \\
@@ -72,8 +67,7 @@ LIZARD_LLM_URL=https://:sk-ant-…@api.anthropic.com/v1?model=claude-sonnet-5`}<
 
       <h2>DuckDB: spill to disk, or use a server</h2>
       <p>
-        Large federated queries can spill to disk instead of running out of memory. Point the engine at a
-        directory inside the data volume:
+        Large federated queries can spill to disk instead of running out of memory. Point the engine at a directory inside the data volume:
       </p>
       <pre>
         <code>{`-e LIZARD_DUCKDB_URL='file:///app/data/duckdb'`}</code>
@@ -88,18 +82,25 @@ LIZARD_LLM_URL=https://:sk-ant-…@api.anthropic.com/v1?model=claude-sonnet-5`}<
 
       <h2>Bootstrapping an admin</h2>
       <p>
-        By default the first visitor creates the admin. For unattended installs, set{' '}
-        <code>LIZARD_ADMIN_PASSWORD</code> (and optionally <code>LIZARD_ADMIN_EMAIL</code>, default{' '}
-        <code>admin@lizard.local</code>). The account is created or reset on every start while the variable
-        is set.
+        By default the first visitor creates the admin. For unattended installs, set <code>LIZARD_ADMIN_PASSWORD</code> (and optionally{" "}
+        <code>LIZARD_ADMIN_EMAIL</code>, default <code>admin@lizard.local</code>). The account is created or reset on every start while the
+        variable is set.
       </p>
 
       <h2>Production checklist</h2>
       <ul>
-        <li>Persist <code>/app/data</code>, or move metadata to Postgres and uploads to S3.</li>
-        <li>Serve over HTTPS and set <code>COOKIE_SECURE=true</code>.</li>
-        <li>Behind a proxy, forward <code>X-Forwarded-Proto</code> and <code>X-Forwarded-Host</code>, or set <code>LIZARD_PUBLIC_URL</code>.</li>
-        <li>Keep <code>LIZARD_ENCRYPTION_KEY</code> in your secret store, never in the image.</li>
+        <li>
+          Persist <code>/app/data</code>, or move metadata to Postgres and uploads to S3.
+        </li>
+        <li>
+          Serve over HTTPS and set <code>COOKIE_SECURE=true</code>.
+        </li>
+        <li>
+          Behind a proxy, forward <code>X-Forwarded-Proto</code> and <code>X-Forwarded-Host</code>, or set <code>LIZARD_PUBLIC_URL</code>.
+        </li>
+        <li>
+          Keep <code>LIZARD_ENCRYPTION_KEY</code> in your secret store, never in the image.
+        </li>
       </ul>
     </Prose>
   );

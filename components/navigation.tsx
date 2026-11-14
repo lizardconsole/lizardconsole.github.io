@@ -1,53 +1,51 @@
-'use client';
+"use client";
 
-import { useEffect, useState } from 'react';
-import Link from 'next/link';
-import { Github, Menu, X, Sun, Moon } from 'lucide-react';
-import { GITHUB_URL, GITHUB_REPO } from '@/lib/site';
-import { GitHubStars } from './github-stars';
-import { Logo } from './logo';
+import { useEffect, useState } from "react";
+import Link from "next/link";
+import { Github, Menu, X, Sun, Moon } from "lucide-react";
+import { GITHUB_URL, GITHUB_REPO } from "@/lib/site";
+import { GitHubStars } from "./github-stars";
+import { Logo } from "./logo";
 
 const navLinks = [
-  { label: 'Features', href: '/#features' },
-  { label: 'How it works', href: '/#how-it-works' },
-  { label: 'Security', href: '/#security' },
-  { label: 'Compare', href: '/#comparison' },
-  { label: 'Docs', href: '/docs' },
+  { label: "Features", href: "/#features" },
+  { label: "How it works", href: "/#how-it-works" },
+  { label: "Security", href: "/#security" },
+  { label: "Compare", href: "/#comparison" },
+  { label: "Docs", href: "/docs" }
 ];
 
 export function Navigation() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [theme, setTheme] = useState<'light' | 'dark' | null>(null);
+  const [theme, setTheme] = useState<"light" | "dark" | null>(null);
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    setTheme(document.documentElement.classList.contains('dark') ? 'dark' : 'light');
+    setTheme(document.documentElement.classList.contains("dark") ? "dark" : "light");
     const onScroll = () => setScrolled(window.scrollY > 8);
     onScroll();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   const toggleTheme = () => {
     setTheme((prev) => {
-      const next = prev === 'dark' ? 'light' : 'dark';
-      document.documentElement.classList.remove('light', 'dark');
+      const next = prev === "dark" ? "light" : "dark";
+      document.documentElement.classList.remove("light", "dark");
       document.documentElement.classList.add(next);
       try {
-        localStorage.setItem('theme', next);
+        localStorage.setItem("theme", next);
       } catch {}
       return next;
     });
   };
 
-  const ThemeIcon = theme === 'dark' ? Sun : Moon;
+  const ThemeIcon = theme === "dark" ? Sun : Moon;
 
   return (
     <header
       className={`sticky top-0 z-50 w-full transition-[background-color,border-color] duration-200 border-b ${
-        scrolled || mobileMenuOpen
-          ? 'bg-bg-primary/80 backdrop-blur-xl border-border-primary'
-          : 'bg-transparent border-transparent'
+        scrolled || mobileMenuOpen ? "bg-bg-primary/80 backdrop-blur-xl border-border-primary" : "bg-transparent border-transparent"
       }`}
     >
       <div className="container mx-auto flex h-16 items-center justify-between px-4 sm:px-6">
@@ -106,7 +104,7 @@ export function Navigation() {
           </button>
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
+            aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
             className="flex h-9 w-9 items-center justify-center rounded-md text-text-secondary hover:text-text-primary cursor-pointer"
           >
             {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
@@ -136,11 +134,7 @@ export function Navigation() {
               GitHub
             </a>
           </div>
-          <a
-            href="/docs/quickstart"
-            onClick={() => setMobileMenuOpen(false)}
-            className="btn btn-primary mt-4 w-full"
-          >
+          <a href="/docs/quickstart" onClick={() => setMobileMenuOpen(false)} className="btn btn-primary mt-4 w-full">
             Get started
           </a>
         </div>

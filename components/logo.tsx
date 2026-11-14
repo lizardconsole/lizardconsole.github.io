@@ -1,11 +1,11 @@
-import Image from 'next/image';
+import Image from "next/image";
 
 const sizes = {
-  md: { icon: 28, text: 'text-[17px]', mono: 'text-[15px]', caret: 'h-[15px] w-[7px]' },
-  sm: { icon: 24, text: 'text-[15px]', mono: 'text-[13px]', caret: 'h-[13px] w-[6px]' },
+  md: { icon: 28, text: "text-[17px]", mono: "text-[15px]", caret: "h-[15px] w-[7px]" },
+  sm: { icon: 24, text: "text-[15px]", mono: "text-[13px]", caret: "h-[13px] w-[6px]" }
 };
 
-export function Logo({ size = 'md', priority = false }: { size?: keyof typeof sizes; priority?: boolean }) {
+export function Logo({ size = "md", priority = false }: { size?: keyof typeof sizes; priority?: boolean }) {
   const s = sizes[size];
   return (
     <span className="flex items-center gap-2">

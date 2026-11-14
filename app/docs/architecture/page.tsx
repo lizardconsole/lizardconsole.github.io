@@ -1,9 +1,9 @@
-import type { Metadata } from 'next';
-import { Prose } from '@/components/prose';
+import type { Metadata } from "next";
+import { Prose } from "@/components/prose";
 
 export const metadata: Metadata = {
-  title: 'Architecture',
-  description: 'How the console, the SQL Guard, and the federation engine fit together.',
+  title: "Architecture",
+  description: "How the console, the SQL Guard, and the federation engine fit together."
 };
 
 export default function ArchitecturePage() {
@@ -11,8 +11,8 @@ export default function ArchitecturePage() {
     <Prose>
       <h1>Architecture</h1>
       <p>
-        Lizard is a single full-stack Next.js app. Every query to any target database — CRUD, AI, or
-        charts — passes through one SQL Guard before it runs.
+        Lizard is a single full-stack Next.js app. Every query to any target database — CRUD, AI, or charts — passes through one SQL Guard
+        before it runs.
       </p>
 
       <h2>Request flow</h2>
@@ -26,60 +26,94 @@ export default function ArchitecturePage() {
 
       <h2>Tech stack</h2>
       <ul>
-        <li><strong>App framework:</strong> Next.js (App Router) + TypeScript.</li>
-        <li><strong>DB driver / query builder:</strong> <code>pg</code> and Kysely — table/column identifiers are only known at runtime, so a compile-time ORM doesn't fit the query layer.</li>
-        <li><strong>Federation engine:</strong> DuckDB embedded in the Node process. It <code>ATTACH</code>es multiple databases read-only (Postgres and MySQL natively, MongoDB via DuckDB's community <code>mongo</code> extension) and runs one SQL statement across them, with filters pushed down. Nothing is installed on your databases.</li>
-        <li><strong>AI:</strong> any provider via <code>LIZARD_LLM_URL</code>: Anthropic, OpenAI, Gemini, DeepSeek, or an OpenAI-compatible gateway. The model gets a cheap, name-only schema skeleton plus tools it calls on demand — never a full schema dump.</li>
-        <li><strong>Charts:</strong> auto-picked from the result's own shape — time series, comparison, single value, or a plain table when nothing's chartable.</li>
-        <li><strong>Metadata store:</strong> SQLite by default or Postgres for multiple instances, holding connections, overrides, virtual relationships, dashboards, and the audit log. Lizard never writes to the target database's schema.</li>
+        <li>
+          <strong>App framework:</strong> Next.js (App Router) + TypeScript.
+        </li>
+        <li>
+          <strong>DB driver / query builder:</strong> <code>pg</code> and Kysely — table/column identifiers are only known at runtime, so a
+          compile-time ORM doesn't fit the query layer.
+        </li>
+        <li>
+          <strong>Federation engine:</strong> DuckDB embedded in the Node process. It <code>ATTACH</code>es multiple databases read-only
+          (Postgres and MySQL natively, MongoDB via DuckDB's community <code>mongo</code> extension) and runs one SQL statement across them,
+          with filters pushed down. Nothing is installed on your databases.
+        </li>
+        <li>
+          <strong>AI:</strong> any provider via <code>LIZARD_LLM_URL</code>: Anthropic, OpenAI, Gemini, DeepSeek, or an OpenAI-compatible
+          gateway. The model gets a cheap, name-only schema skeleton plus tools it calls on demand — never a full schema dump.
+        </li>
+        <li>
+          <strong>Charts:</strong> auto-picked from the result's own shape — time series, comparison, single value, or a plain table when
+          nothing's chartable.
+        </li>
+        <li>
+          <strong>Metadata store:</strong> SQLite by default or Postgres for multiple instances, holding connections, overrides, virtual
+          relationships, dashboards, and the audit log. Lizard never writes to the target database's schema.
+        </li>
       </ul>
 
       <h2>The layer between the app and your databases</h2>
       <p>
-        With a database per microservice, the interesting engineering isn&apos;t any single query — it&apos;s
-        making sure nothing in the process scales with the size of the fleet.
+        With a database per microservice, the interesting engineering isn&apos;t any single query — it&apos;s making sure nothing in the
+        process scales with the size of the fleet.
       </p>
       <ul>
-        <li><strong>Connection pools expire.</strong> Pools are keyed by connection and role and swept on access; one untouched for ten minutes is closed and forgotten, so browsing hundreds of databases doesn&apos;t leave a live pool behind for each.</li>
-        <li><strong>The schema catalog is an LRU bounded by column count</strong> (not by number of connections), served stale-while-revalidate: past its TTL you get the last known schema immediately while re-introspection runs behind you. Schema edits made through Lizard invalidate it directly.</li>
-        <li><strong>Introspection is scoped and fanned out with a ceiling</strong> — an explicit list of connections, eight at a time, each with its own timeout, so one unreachable database is a single error entry rather than a stalled request.</li>
-        <li><strong>Session timezone is set on the connection</strong>, lazily and only when it changes, on Postgres, MySQL, and DuckDB alike — and folded into the query cache key so two zones never share a cached result.</li>
+        <li>
+          <strong>Connection pools expire.</strong> Pools are keyed by connection and role and swept on access; one untouched for ten
+          minutes is closed and forgotten, so browsing hundreds of databases doesn&apos;t leave a live pool behind for each.
+        </li>
+        <li>
+          <strong>The schema catalog is an LRU bounded by column count</strong> (not by number of connections), served
+          stale-while-revalidate: past its TTL you get the last known schema immediately while re-introspection runs behind you. Schema
+          edits made through Lizard invalidate it directly.
+        </li>
+        <li>
+          <strong>Introspection is scoped and fanned out with a ceiling</strong> — an explicit list of connections, eight at a time, each
+          with its own timeout, so one unreachable database is a single error entry rather than a stalled request.
+        </li>
+        <li>
+          <strong>Session timezone is set on the connection</strong>, lazily and only when it changes, on Postgres, MySQL, and DuckDB alike
+          — and folded into the query cache key so two zones never share a cached result.
+        </li>
       </ul>
 
       <h2>How AI querying works</h2>
       <p>
-        The model is never handed your whole schema. It gets a name-only skeleton (every connection,
-        schema, and table — no columns) and three tools it calls on demand:
+        The model is never handed your whole schema. It gets a name-only skeleton (every connection, schema, and table — no columns) and
+        three tools it calls on demand:
       </p>
       <ul>
-        <li><code>search_schema</code> — fuzzy-match table/column names and comments fleet-wide.</li>
-        <li><code>describe_table</code> — full column detail for exactly one table.</li>
-        <li><code>get_relations</code> — real and virtual foreign keys touching one table, in either direction.</li>
+        <li>
+          <code>search_schema</code> — fuzzy-match table/column names and comments fleet-wide.
+        </li>
+        <li>
+          <code>describe_table</code> — full column detail for exactly one table.
+        </li>
+        <li>
+          <code>get_relations</code> — real and virtual foreign keys touching one table, in either direction.
+        </li>
       </ul>
       <p>
-        It settles the plan by calling a terminal <code>submit_plan</code> tool, validated and executed
-        through the same Guard/read-only-role path as everything else. Every step streams to the UI live,
-        and a Stop button cancels the request end to end — it aborts the in-flight LLM call and cancels the
-        database connection it's running against.
+        It settles the plan by calling a terminal <code>submit_plan</code> tool, validated and executed through the same
+        Guard/read-only-role path as everything else. Every step streams to the UI live, and a Stop button cancels the request end to end —
+        it aborts the in-flight LLM call and cancels the database connection it's running against.
       </p>
       <p>
-        By default the AI only joins tables with a real foreign key or a declared virtual relationship —
-        it won't guess a join from matching column names. A cross-database join always requires a declared
-        virtual relationship, since there's no way to verify a guessed one across separate databases.
+        By default the AI only joins tables with a real foreign key or a declared virtual relationship — it won't guess a join from matching
+        column names. A cross-database join always requires a declared virtual relationship, since there's no way to verify a guessed one
+        across separate databases.
       </p>
 
       <h2>Cross-database queries (federation)</h2>
       <p>
-        Postgres can join across schemas natively but not across separate databases, and MySQL/MongoDB
-        never share a server with anything else. For questions and charts that span connections — or
-        involve MongoDB at all — Lizard spins up an embedded DuckDB, attaches each involved database
-        read-only with its <code>lizard_read</code> credentials, and runs one SQL statement across them.
+        Postgres can join across schemas natively but not across separate databases, and MySQL/MongoDB never share a server with anything
+        else. For questions and charts that span connections — or involve MongoDB at all — Lizard spins up an embedded DuckDB, attaches each
+        involved database read-only with its <code>lizard_read</code> credentials, and runs one SQL statement across them.
       </p>
       <p>
-        Since microservice databases have no real foreign keys between them, you declare virtual
-        relationships (e.g. <code>orders.customer_id → users_service.public.customers.id</code>) in the
-        table &quot;Customize&quot; panel. These power cross-database reference pickers in the UI and are
-        the only way the AI is allowed to join tables across connections.
+        Since microservice databases have no real foreign keys between them, you declare virtual relationships (e.g.{" "}
+        <code>orders.customer_id → users_service.public.customers.id</code>) in the table &quot;Customize&quot; panel. These power
+        cross-database reference pickers in the UI and are the only way the AI is allowed to join tables across connections.
       </p>
     </Prose>
   );

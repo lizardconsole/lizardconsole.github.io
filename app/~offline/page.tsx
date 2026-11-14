@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { WifiOff } from 'lucide-react';
+import { WifiOff } from "lucide-react";
 
 export default function OfflinePage() {
   return (
@@ -12,10 +12,7 @@ export default function OfflinePage() {
           This page needs a connection — it will load once you&apos;re back online.
         </p>
       </div>
-      <button
-        onClick={() => location.reload()}
-        className="btn btn-sm btn-primary mt-2"
-      >
+      <button onClick={() => location.reload()} className="btn btn-sm btn-primary mt-2">
         Retry
       </button>
     </div>

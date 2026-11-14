@@ -1,11 +1,11 @@
-import type { NextConfig } from 'next';
-import { withSerwist } from '@serwist/turbopack';
+import type { NextConfig } from "next";
+import { withSerwist } from "@serwist/turbopack";
 
 const nextConfig: NextConfig = {
-  output: 'export',
+  output: "export",
   images: {
-    unoptimized: true,
-  },
+    unoptimized: true
+  }
 };
 
 export default withSerwist(nextConfig);

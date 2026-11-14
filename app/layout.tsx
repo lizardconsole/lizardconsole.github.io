@@ -1,62 +1,62 @@
-import type { Metadata, Viewport } from 'next';
-import { SerwistProvider } from '@serwist/turbopack/react';
-import NextTopLoader from 'nextjs-toploader';
-import { GoogleTagManager } from '@next/third-parties/google';
-import './globals.css';
+import type { Metadata, Viewport } from "next";
+import { SerwistProvider } from "@serwist/turbopack/react";
+import NextTopLoader from "nextjs-toploader";
+import { GoogleTagManager } from "@next/third-parties/google";
+import "./globals.css";
 
-const siteUrl = 'https://lizardconsole.github.io';
+const siteUrl = "https://lizardconsole.github.io";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: 'Lizard Console — one console for every database you run',
-    template: '%s · Lizard Console',
+    default: "Lizard Console — one console for every database you run",
+    template: "%s · Lizard Console"
   },
   description:
-    'Point Lizard Console at one or many Postgres, MySQL, and MongoDB databases and get an auto-generated CRUD UI, natural-language querying, and prompt-driven charts across the fleet, with cross-database joins powered by DuckDB 2.0 — 100% self-hosted, zero schema pollution.',
-  applicationName: 'Lizard Console',
+    "Point Lizard Console at one or many Postgres, MySQL, and MongoDB databases and get an auto-generated CRUD UI, natural-language querying, and prompt-driven charts across the fleet, with cross-database joins powered by DuckDB 2.0 — 100% self-hosted, zero schema pollution.",
+  applicationName: "Lizard Console",
   keywords: [
-    'Lizard Console',
-    'database admin console',
-    'self-hosted admin panel',
-    'Postgres admin UI',
-    'MySQL admin UI',
-    'MongoDB admin UI',
-    'AI SQL assistant',
-    'natural language database query',
-    'self-hosted data console',
-    'multi-database console',
-    'DuckDB',
-    'DuckDB 2.0',
-    'DuckDB federated query',
-    'cross-database SQL',
-    'query CSV and Parquet with SQL',
+    "Lizard Console",
+    "database admin console",
+    "self-hosted admin panel",
+    "Postgres admin UI",
+    "MySQL admin UI",
+    "MongoDB admin UI",
+    "AI SQL assistant",
+    "natural language database query",
+    "self-hosted data console",
+    "multi-database console",
+    "DuckDB",
+    "DuckDB 2.0",
+    "DuckDB federated query",
+    "cross-database SQL",
+    "query CSV and Parquet with SQL"
   ],
-  authors: [{ name: 'Lizard Console', url: 'https://github.com/lizardconsole/lizard' }],
+  authors: [{ name: "Lizard Console", url: "https://github.com/lizardconsole/lizard" }],
   openGraph: {
-    type: 'website',
+    type: "website",
     url: siteUrl,
-    siteName: 'Lizard Console',
-    title: 'Lizard Console — one console for every database you run',
+    siteName: "Lizard Console",
+    title: "Lizard Console — one console for every database you run",
     description:
-      'Auto-generated CRUD UI, natural-language querying, and prompt-driven charts across your Postgres, MySQL, and MongoDB fleet. 100% self-hosted.',
+      "Auto-generated CRUD UI, natural-language querying, and prompt-driven charts across your Postgres, MySQL, and MongoDB fleet. 100% self-hosted."
   },
   verification: {
-    google: 'v-4ogWRbsHeReZuqSLqwLtFWgIMoKNGUMmsiBlCvl-Q',
+    google: "v-4ogWRbsHeReZuqSLqwLtFWgIMoKNGUMmsiBlCvl-Q"
   },
   twitter: {
-    card: 'summary_large_image',
-    title: 'Lizard Console — one console for every database you run',
+    card: "summary_large_image",
+    title: "Lizard Console — one console for every database you run",
     description:
-      'Auto-generated CRUD UI, natural-language querying, and prompt-driven charts across your Postgres, MySQL, and MongoDB fleet. 100% self-hosted.',
-  },
+      "Auto-generated CRUD UI, natural-language querying, and prompt-driven charts across your Postgres, MySQL, and MongoDB fleet. 100% self-hosted."
+  }
 };
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#ffffff' },
-    { media: '(prefers-color-scheme: dark)', color: '#0b0b0d' },
-  ],
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: dark)", color: "#0b0b0d" }
+  ]
 };
 
 const themeInitScript = `
@@ -77,14 +77,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
       </head>
-      <body
-        className="min-h-screen bg-bg-primary text-text-primary font-sans antialiased overflow-x-clip"
-        suppressHydrationWarning
-      >
+      <body className="min-h-screen bg-bg-primary text-text-primary font-sans antialiased overflow-x-clip" suppressHydrationWarning>
         <GoogleTagManager gtmId="GTM-5PPP23VL" />
         <NextTopLoader color="var(--accent)" height={2} showSpinner={false} shadow={false} />
 
-        <SerwistProvider swUrl="/sw.js" disable={process.env.NODE_ENV === 'development'}>
+        <SerwistProvider swUrl="/sw.js" disable={process.env.NODE_ENV === "development"}>
           {children}
         </SerwistProvider>
       </body>

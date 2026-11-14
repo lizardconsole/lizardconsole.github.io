@@ -1,39 +1,38 @@
-import { SectionHeader } from './section-header';
+import { SectionHeader } from "./section-header";
 
 const steps = [
   {
-    title: 'Start Lizard',
-    desc: 'Generate an encryption key once and save it in .env, with an LLM URL if you want AI querying. Then start Lizard from that file.',
+    title: "Start Lizard",
+    desc: "Generate an encryption key once and save it in .env, with an LLM URL if you want AI querying. Then start Lizard from that file.",
     code: `openssl rand -base64 32
 
 LIZARD_ENCRYPTION_KEY=<that key>
 LIZARD_LLM_URL=https://:sk-…@…?model=…
 
-docker run --env-file .env …`,
+docker run --env-file .env …`
   },
   {
-    title: 'Add your connections',
-    desc: 'Register each database in Settings. The connection name becomes its alias in cross-database SQL.',
+    title: "Add your connections",
+    desc: "Register each database in Settings. The connection name becomes its alias in cross-database SQL.",
     code: `users_service    postgres   read + write
 orders_service   postgres   read + write
 support_service  mysql      read only
-events_service   mongodb    read only`,
+events_service   mongodb    read only`
   },
   {
-    title: 'Browse, ask, chart',
-    desc: 'Every table gets a UI immediately. Link tables across services with a virtual relationship when you need to join them.',
+    title: "Browse, ask, chart",
+    desc: "Every table gets a UI immediately. Link tables across services with a virtual relationship when you need to join them.",
     code: `orders.customer_id
-  → users_service.public.customers.id`,
-  },
+  → users_service.public.customers.id`
+  }
 ];
 
 export function HowItWorks() {
   return (
-    <section id="how-it-works" className="border-t border-border-primary bg-bg-secondary py-24 sm:py-32">
+    <section id="how-it-works" className="border-t border-border-primary py-24 sm:py-32">
       <div className="container mx-auto px-4 sm:px-6">
         <SectionHeader eyebrow="How it works" title="From connection string to console in a few minutes">
-          No manifests and no code generation. Lizard derives everything from the live schema, and
-          picks up changes as they happen.
+          No manifests and no code generation. Lizard derives everything from the live schema, and picks up changes as they happen.
         </SectionHeader>
 
         <ol className="mt-14 grid grid-cols-1 gap-4 lg:grid-cols-3">

@@ -1,30 +1,29 @@
-import Link from 'next/link';
-import { ArrowRight, FileSpreadsheet } from 'lucide-react';
-import { SectionHeader } from './section-header';
+import Link from "next/link";
+import { ArrowRight, FileSpreadsheet } from "lucide-react";
+import { SectionHeader } from "./section-header";
 
-const formats = ['CSV', 'TSV', 'XLSX', 'JSON', 'NDJSON', 'Parquet', 'Avro'];
+const formats = ["CSV", "TSV", "XLSX", "JSON", "NDJSON", "Parquet", "Avro"];
 
 const sheets = [
-  { name: 'Q1', rows: '412 rows', active: true },
-  { name: 'Q2', rows: '398 rows', active: false },
-  { name: 'Regions', rows: '12 rows', active: false },
+  { name: "Q1", rows: "412 rows", active: true },
+  { name: "Q2", rows: "398 rows", active: false },
+  { name: "Regions", rows: "12 rows", active: false }
 ];
 
 const results = [
-  { region: 'EMEA', target: '1.20M', actual: '1.34M', over: true },
-  { region: 'NA', target: '2.00M', actual: '1.86M', over: false },
-  { region: 'APAC', target: '0.80M', actual: '0.91M', over: true },
+  { region: "EMEA", target: "1.20M", actual: "1.34M", over: true },
+  { region: "NA", target: "2.00M", actual: "1.86M", over: false },
+  { region: "APAC", target: "0.80M", actual: "0.91M", over: true }
 ];
 
 export function FileConnections() {
   return (
-    <section id="files" className="border-t border-border-primary py-24 sm:py-32">
+    <section id="files" className="border-t border-border-primary bg-bg-secondary py-24 sm:py-32">
       <div className="container mx-auto grid grid-cols-1 items-center gap-14 px-4 sm:px-6 lg:grid-cols-2">
         <div>
           <SectionHeader eyebrow="File connections" title="Query a spreadsheet like it’s a table">
-            Set one storage URL and upload the data that never made it into a database: finance targets in
-            Excel, a partner’s Parquet export, an API dump in JSON. Browse it, ask about it, chart it, and
-            join it against live services.
+            Set one storage URL and upload the data that never made it into a database: finance targets in Excel, a partner’s Parquet
+            export, an API dump in JSON. Browse it, ask about it, chart it, and join it against live services.
           </SectionHeader>
 
           <ul className="mt-8 flex flex-wrap gap-2">
@@ -39,13 +38,11 @@ export function FileConnections() {
           </ul>
 
           <pre className="mt-8 overflow-x-auto rounded-lg border border-border-primary bg-bg-secondary px-4 py-3 font-mono text-[12.5px] leading-6 text-text-primary">
-            <code>
-              LIZARD_STORAGE_URL=s3://…@s3.amazonaws.com/lizard-uploads
-            </code>
+            <code>LIZARD_STORAGE_URL=s3://…@s3.amazonaws.com/lizard-uploads</code>
           </pre>
           <p className="mt-3 text-sm leading-6 text-text-secondary">
-            Local disk, Amazon S3 or MinIO. Each file is parsed once into a cached DuckDB table, and every
-            Excel sheet becomes its own table.
+            Local disk, Amazon S3 or MinIO. Each file is parsed once into a cached DuckDB table, and every Excel sheet becomes its own
+            table.
           </p>
 
           <Link
@@ -73,7 +70,7 @@ export function FileConnections() {
                 <li
                   key={sheet.name}
                   className={`rounded-lg border px-3 py-2 ${
-                    sheet.active ? 'border-border-strong bg-bg-secondary' : 'border-border-primary'
+                    sheet.active ? "border-border-strong bg-bg-secondary" : "border-border-primary"
                   }`}
                 >
                   <p className="font-mono text-[12px] text-text-primary">"{sheet.name}"</p>
@@ -86,10 +83,11 @@ export function FileConnections() {
           <div className="card overflow-hidden">
             <pre className="overflow-x-auto border-b border-border-primary bg-bg-secondary p-4 font-mono text-[12px] leading-5 text-text-secondary">
               <code>
-                <span className="text-text-primary">select</span> t.region, t.target, sum(o.total){'\n'}
-                <span className="text-text-primary">from</span> targets."Q1" t{'\n'}
-                <span className="text-text-primary">join</span> orders_service.public.orders o{'\n'}
-                {'  '}<span className="text-text-primary">on</span> o.region = t.region{'\n'}
+                <span className="text-text-primary">select</span> t.region, t.target, sum(o.total){"\n"}
+                <span className="text-text-primary">from</span> targets."Q1" t{"\n"}
+                <span className="text-text-primary">join</span> orders_service.public.orders o{"\n"}
+                {"  "}
+                <span className="text-text-primary">on</span> o.region = t.region{"\n"}
                 <span className="text-text-primary">group by</span> 1, 2
               </code>
             </pre>
@@ -106,11 +104,7 @@ export function FileConnections() {
                   <tr key={row.region} className="border-t border-border-primary">
                     <td className="px-4 py-2 text-text-primary">{row.region}</td>
                     <td className="px-4 py-2 font-mono text-text-secondary tabular-nums">{row.target}</td>
-                    <td
-                      className={`px-4 py-2 text-right font-mono tabular-nums ${
-                        row.over ? 'text-accent' : 'text-text-secondary'
-                      }`}
-                    >
+                    <td className={`px-4 py-2 text-right font-mono tabular-nums ${row.over ? "text-accent" : "text-text-secondary"}`}>
                       {row.actual}
                     </td>
                   </tr>

@@ -1,5 +1,5 @@
-import { ArrowRight } from 'lucide-react';
-import { GITHUB_URL, LICENSE_NAME } from '@/lib/site';
+import { ArrowRight } from "lucide-react";
+import { GITHUB_URL, LICENSE_NAME } from "@/lib/site";
 
 export function CallToActionBand() {
   return (
@@ -11,8 +11,8 @@ export function CallToActionBand() {
             Give your team a real view of its data
           </h2>
           <p className="mx-auto mt-5 max-w-lg text-base sm:text-[17px] leading-7 text-text-secondary">
-            Inspect, edit, relate and query every Postgres, MySQL and MongoDB database you run, on your own
-            infrastructure. Open source under the {LICENSE_NAME} licence.
+            Inspect, edit, relate and query every Postgres, MySQL and MongoDB database you run, on your own infrastructure. Open source
+            under the {LICENSE_NAME} licence.
           </p>
           <div className="mt-9 flex flex-col sm:flex-row items-center justify-center gap-3">
             <a href="/docs/quickstart" className="btn btn-primary w-full sm:w-auto">

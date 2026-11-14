@@ -1,14 +1,14 @@
-'use client';
+"use client";
 
-import Image from 'next/image';
-import { ArrowRight } from 'lucide-react';
-import { GITHUB_URL, LICENSE_NAME, LICENSE_URL } from '@/lib/site';
-import { useGallery } from './gallery-provider';
-import { GridGlow } from './grid-glow';
+import Image from "next/image";
+import { ArrowRight } from "lucide-react";
+import { GITHUB_URL, LICENSE_NAME, LICENSE_URL } from "@/lib/site";
+import { useGallery } from "./gallery-provider";
+import { GridGlow } from "./grid-glow";
 
-const HERO_SHOT = '/screenshots/federated-orders-customers.png';
+const HERO_SHOT = "/screenshots/federated-orders-customers.png";
 
-const engines = ['PostgreSQL', 'MySQL', 'MongoDB', 'CSV · Parquet · XLSX', 'Joins on DuckDB 2.0'];
+const engines = ["PostgreSQL", "MySQL", "MongoDB", "CSV · Parquet · XLSX", "Joins on DuckDB 2.0"];
 
 export function Hero() {
   const gallery = useGallery();
@@ -21,7 +21,7 @@ export function Hero() {
       <div className="relative container mx-auto px-4 sm:px-6 pt-20 sm:pt-28">
         <div className="mx-auto max-w-3xl text-center">
           <p className="font-mono text-[13px] sm:text-sm text-text-secondary">
-            Open source under{' '}
+            Open source under{" "}
             <a
               href={LICENSE_URL}
               target="_blank"
@@ -39,9 +39,8 @@ export function Hero() {
           </h1>
 
           <p className="mx-auto mt-6 max-w-xl text-[17px] sm:text-lg leading-7 sm:leading-8 text-text-secondary text-pretty">
-            Point Lizard at your Postgres, MySQL and MongoDB fleet. Get an editable UI for every table,
-            plain-English queries, and dashboards that join across services. No config, nothing written
-            to your databases.
+            Point Lizard at your Postgres, MySQL and MongoDB fleet. Get an editable UI for every table, plain-English queries, and
+            dashboards that join across services. No config, and no tables added to your databases.
           </p>
 
           <div className="mt-9 flex flex-col sm:flex-row items-center justify-center gap-3">

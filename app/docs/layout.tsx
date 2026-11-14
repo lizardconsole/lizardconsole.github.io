@@ -1,7 +1,7 @@
-import type { ReactNode } from 'react';
-import { Navigation } from '@/components/navigation';
-import { Footer } from '@/components/footer';
-import { DocsSidebar } from '@/components/docs-sidebar';
+import type { ReactNode } from "react";
+import { Navigation } from "@/components/navigation";
+import { Footer } from "@/components/footer";
+import { DocsSidebar } from "@/components/docs-sidebar";
 
 export default function DocsLayout({ children }: { children: ReactNode }) {
   return (
