@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Prose } from "@/components/prose";
+import { Code } from "@/components/code";
 import { DOCKER_IMAGE, APP_PORT } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -8,15 +9,13 @@ export const metadata: Metadata = {
   description: "Compose files for Lizard on SQLite, on Postgres with Redis, and with a remote DuckDB server."
 };
 
-const envFile = `LIZARD_ENCRYPTION_KEY=<key generated once with: openssl rand -base64 32>
-LIZARD_LLM_URL=https://:sk-ant-…@api.anthropic.com/v1?model=claude-sonnet-5`;
-
 const sqliteCompose = `services:
   lizard:
     image: ${DOCKER_IMAGE}
     ports:
       - "${APP_PORT}:${APP_PORT}"
-    env_file: .env
+    environment:
+      LIZARD_ENCRYPTION_KEY: {{ENCRYPTION_KEY}}
     volumes:
       - lizard_data:/app/data
     restart: unless-stopped
@@ -29,9 +28,9 @@ const postgresCompose = `services:
     image: ${DOCKER_IMAGE}
     ports:
       - "${APP_PORT}:${APP_PORT}"
-    env_file: .env
     environment:
-      LIZARD_METADATA_URL: postgres://lizard:\${METADATA_PASSWORD}@metadata:5432/lizard
+      LIZARD_ENCRYPTION_KEY: {{ENCRYPTION_KEY}}
+      LIZARD_METADATA_URL: postgres://lizard:{{METADATA_PASSWORD}}@metadata:5432/lizard
       LIZARD_CACHE_URL: redis://cache:6379
       LIZARD_DUCKDB_URL: file:///app/data/duckdb
       COOKIE_SECURE: "true"
@@ -48,7 +47,7 @@ const postgresCompose = `services:
     image: postgres:18
     environment:
       POSTGRES_USER: lizard
-      POSTGRES_PASSWORD: \${METADATA_PASSWORD}
+      POSTGRES_PASSWORD: {{METADATA_PASSWORD}}
       POSTGRES_DB: lizard
     volumes:
       - metadata_data:/var/lib/postgresql
@@ -67,7 +66,7 @@ volumes:
   metadata_data:`;
 
 const duckdbServerEnv = `    environment:
-      LIZARD_DUCKDB_URL: https://:\${DUCKDB_TOKEN}@duck.internal:9494`;
+      LIZARD_DUCKDB_URL: https://:<server token>@duck.internal:9494`;
 
 export default function DockerComposePage() {
   return (
@@ -75,36 +74,29 @@ export default function DockerComposePage() {
       <h1>Docker Compose</h1>
       <p>
         Two starting points: a single container on SQLite for one instance, and a stack with Postgres metadata and Redis that is ready to
-        scale out. Both read secrets from a <code>.env</code> file next to <code>docker-compose.yml</code>.
+        scale out. Settings go straight into each service’s <code>environment</code>, so the file is all you need.
       </p>
       <p>
-        Generate the encryption key once with <code>openssl rand -base64 32</code> and paste the output into <code>.env</code>. Keep the
-        same key for the life of the deployment: a new one can’t decrypt passwords saved under the old one.
+        <code>LIZARD_ENCRYPTION_KEY</code> is the only required setting. The examples below come with a key generated in your browser when
+        this page loaded, unique to you, so you can copy them as they are. Once Lizard has started with a key,{" "}
+        <strong>never change it</strong>: a new key can’t decrypt passwords saved under the old one. To turn on AI querying, add{" "}
+        <code>LIZARD_LLM_URL</code> under <code>environment</code>; see <Link href="/docs/integrations/llm">LLM providers</Link>.
       </p>
-      <pre>
-        <code>{envFile}</code>
-      </pre>
 
       <h2>Single instance on SQLite</h2>
       <p>
         Metadata lives in <code>/app/data/lizard.sqlite</code> on the named volume, and DuckDB runs in-memory inside the container. This is
         all most teams need.
       </p>
-      <pre>
-        <code>{sqliteCompose}</code>
-      </pre>
-      <pre>
-        <code>docker compose up -d</code>
-      </pre>
+      <Code secrets>{sqliteCompose}</Code>
+      <Code>{"docker compose up -d"}</Code>
 
       <h2>Postgres metadata and Redis</h2>
       <p>
         Use this shape when you want to run several Lizard replicas behind a load balancer, or simply want metadata in a database you
-        already back up. Add <code>METADATA_PASSWORD</code> to <code>.env</code>.
+        already back up. Its metadata password is generated the same way, and appears twice so both services agree.
       </p>
-      <pre>
-        <code>{postgresCompose}</code>
-      </pre>
+      <Code secrets={{ METADATA_PASSWORD: 12 }}>{postgresCompose}</Code>
       <ul>
         <li>
           <strong>Postgres metadata</strong> lets every instance share connections, users, dashboards and the audit log. Cache invalidation
@@ -133,9 +125,7 @@ export default function DockerComposePage() {
         To move federated and MongoDB SQL work off the Lizard containers, replace <code>LIZARD_DUCKDB_URL</code> with the address and token
         of a DuckDB server:
       </p>
-      <pre>
-        <code>{duckdbServerEnv}</code>
-      </pre>
+      <Code>{duckdbServerEnv}</Code>
       <p>
         The server connects to your databases itself, so it must be able to reach them. See{" "}
         <Link href="/docs/installation/duckdb">DuckDB engine</Link> for setup and trade-offs.

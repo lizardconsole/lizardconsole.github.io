@@ -3,7 +3,11 @@ import { Navigation } from "@/components/navigation";
 import { Footer } from "@/components/footer";
 import { DocsSidebar } from "@/components/docs-sidebar";
 
-export default function DocsLayout({ children }: { children: ReactNode }) {
+interface DocsLayoutProps {
+  children: ReactNode;
+}
+
+export default function DocsLayout({ children }: DocsLayoutProps) {
   return (
     <div className="min-h-screen flex flex-col bg-bg-primary text-text-primary">
       <Navigation />

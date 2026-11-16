@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Prose } from "@/components/prose";
+import { Code } from "@/components/code";
 import { DOCKER_IMAGE, APP_PORT } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -20,21 +21,18 @@ export default function DockerPage() {
 
       <h2>Before you start: the encryption key</h2>
       <p>
-        Generate <code>LIZARD_ENCRYPTION_KEY</code> once, outside the container:
+        <code>LIZARD_ENCRYPTION_KEY</code> is the only required setting. Create a <code>.env</code> file next to where you run Docker with
+        this line. The key was generated in your browser when this page loaded and is unique to you:
       </p>
-      <pre>
-        <code>openssl rand -base64 32</code>
-      </pre>
+      <Code secrets>{"LIZARD_ENCRYPTION_KEY={{ENCRYPTION_KEY}}"}</Code>
       <p>
-        Save it in a <code>.env</code> file next to where you run Docker, and keep a copy in your secret store:
+        Copy it into <code>.env</code> once. Reloading this page shows a new key, so if you already have a <code>.env</code>, keep yours.
+        Keep a copy in your secret store. To turn on AI querying, add <code>LIZARD_LLM_URL</code> to the same file; see{" "}
+        <Link href="/docs/integrations/llm">LLM providers</Link>. Without it, everything except the AI features works as normal.
       </p>
-      <pre>
-        <code>{`LIZARD_ENCRYPTION_KEY=<the generated key>
-LIZARD_LLM_URL=https://:sk-ant-…@api.anthropic.com/v1?model=claude-sonnet-5`}</code>
-      </pre>
       <p>
-        Don’t generate the key inline in the run command, as in <code>-e LIZARD_ENCRYPTION_KEY=$(openssl rand -base64 32)</code>. Every
-        restart or redeploy would then get a new key, and passwords saved under the old one could no longer be decrypted.
+        Never change the key once Lizard has started with it, including on redeploys. Passwords saved under one key can’t be decrypted with
+        another, so a new key means re-entering every connection’s password.
       </p>
 
       <h2>Minimal: SQLite metadata, in-memory DuckDB</h2>
@@ -42,40 +40,32 @@ LIZARD_LLM_URL=https://:sk-ant-…@api.anthropic.com/v1?model=claude-sonnet-5`}<
         The defaults need nothing but the key. Metadata goes to <code>/app/data/lizard.sqlite</code> and federated queries run on an
         embedded, in-memory DuckDB. Mount a volume on <code>/app/data</code> so state survives container restarts.
       </p>
-      <pre>
-        <code>{`docker run -d --name lizard \\
+      <Code>{`docker run -d --name lizard \\
   -p ${APP_PORT}:${APP_PORT} \\
   --env-file .env \\
   -v lizard_data:/app/data \\
-  ${DOCKER_IMAGE}`}</code>
-      </pre>
+  ${DOCKER_IMAGE}`}</Code>
 
       <h2>Postgres metadata</h2>
       <p>
         Point <code>LIZARD_METADATA_URL</code> at a Postgres database whose user can create tables. Tables are created and migrated at
         startup. Use this when you run more than one Lizard instance; see <Link href="/docs/installation/metadata">Metadata database</Link>.
       </p>
-      <pre>
-        <code>{`docker run -d --name lizard \\
+      <Code>{`docker run -d --name lizard \\
   -p ${APP_PORT}:${APP_PORT} \\
   --env-file .env \\
   -e LIZARD_METADATA_URL='postgres://lizard:…@db.internal:5432/lizard' \\
   -e COOKIE_SECURE=true \\
   -v lizard_data:/app/data \\
-  ${DOCKER_IMAGE}`}</code>
-      </pre>
+  ${DOCKER_IMAGE}`}</Code>
 
       <h2>DuckDB: spill to disk, or use a server</h2>
       <p>
         Large federated queries can spill to disk instead of running out of memory. Point the engine at a directory inside the data volume:
       </p>
-      <pre>
-        <code>{`-e LIZARD_DUCKDB_URL='file:///app/data/duckdb'`}</code>
-      </pre>
+      <Code>{`-e LIZARD_DUCKDB_URL='file:///app/data/duckdb'`}</Code>
       <p>Or send federated work to a DuckDB server that can reach your databases:</p>
-      <pre>
-        <code>{`-e LIZARD_DUCKDB_URL='https://:<token>@duck.internal:9494'`}</code>
-      </pre>
+      <Code>{`-e LIZARD_DUCKDB_URL='https://:<token>@duck.internal:9494'`}</Code>
       <p>
         See <Link href="/docs/installation/duckdb">DuckDB engine</Link> for what changes with a server.
       </p>

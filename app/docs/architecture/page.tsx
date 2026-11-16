@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Prose } from "@/components/prose";
+import { Code } from "@/components/code";
 
 export const metadata: Metadata = {
   title: "Architecture",
@@ -16,13 +17,11 @@ export default function ArchitecturePage() {
       </p>
 
       <h2>Request flow</h2>
-      <pre>
-        <code>{`Browser (table browser, AI query box, charts)
+      <Code>{`Browser (table browser, AI query box, charts)
   → Next.js API layer (introspect / data / AI / charts services)
     → SQL Guard (parse, single SELECT only, LIMIT, timeout, read-only tx)
       → single connection (native)         → target database (read or write role)
-      → cross-connection (federated)       → DuckDB (ATTACH, read-only) → target databases`}</code>
-      </pre>
+      → cross-connection (federated)       → DuckDB (ATTACH, read-only) → target databases`}</Code>
 
       <h2>Tech stack</h2>
       <ul>

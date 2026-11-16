@@ -3,11 +3,8 @@ import { SectionHeader } from "./section-header";
 const steps = [
   {
     title: "Start Lizard",
-    desc: "Generate an encryption key once and save it in .env, with an LLM URL if you want AI querying. Then start Lizard from that file.",
-    code: `openssl rand -base64 32
-
-LIZARD_ENCRYPTION_KEY=<that key>
-LIZARD_LLM_URL=https://:sk-…@…?model=…
+    desc: "The only required setting is an encryption key: put any random string in .env, then start Lizard from that file. Add an LLM URL later if you want AI.",
+    code: `LIZARD_ENCRYPTION_KEY=<any random string>
 
 docker run --env-file .env …`
   },

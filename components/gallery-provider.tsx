@@ -72,7 +72,11 @@ export function useGallery() {
   return ctx;
 }
 
-export function GalleryProvider({ children }: { children: ReactNode }) {
+interface GalleryProviderProps {
+  children: ReactNode;
+}
+
+export function GalleryProvider({ children }: GalleryProviderProps) {
   const [index, setIndex] = useState(-1);
 
   const open = useCallback((src: string) => {

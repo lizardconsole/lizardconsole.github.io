@@ -38,19 +38,15 @@ const popVariants: Variants = {
   }
 };
 
-function Cell({
-  title,
-  desc,
-  children,
-  className = "",
-  index = 0
-}: {
+interface CellProps {
   title: string;
   desc: string;
   children: ReactNode;
   className?: string;
   index?: number;
-}) {
+}
+
+function Cell({ title, desc, children, className = "", index = 0 }: CellProps) {
   return (
     <motion.div
       custom={index}
@@ -70,7 +66,13 @@ function Cell({
   );
 }
 
-function Shot({ src, alt, position = "object-left-top" }: { src: string; alt: string; position?: string }) {
+interface ShotProps {
+  src: string;
+  alt: string;
+  position?: string;
+}
+
+function Shot({ src, alt, position = "object-left-top" }: ShotProps) {
   const gallery = useGallery();
   return (
     <motion.button

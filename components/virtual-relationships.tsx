@@ -1,6 +1,13 @@
 import { SectionHeader } from "./section-header";
 
-const sources = [
+interface Source {
+  db: string;
+  engine: string;
+  table: string;
+  column: string;
+}
+
+const sources: Source[] = [
   { db: "orders_service", engine: "PostgreSQL", table: "orders", column: "customer_id" },
   { db: "support_service", engine: "MySQL", table: "tickets", column: "customer_id" },
   { db: "events_service", engine: "MongoDB", table: "page_views", column: "customer_id" }
@@ -25,7 +32,7 @@ const points = [
   }
 ];
 
-function SourceNode({ db, engine, table, column }: (typeof sources)[number]) {
+function SourceNode({ db, engine, table, column }: Source) {
   return (
     <div className="card flex items-center justify-between gap-3 px-4 py-3">
       <div className="min-w-0">

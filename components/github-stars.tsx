@@ -7,7 +7,11 @@ function formatStars(n: number): string {
   return `${(n / 1000).toFixed(1).replace(/\.0$/, "")}k`;
 }
 
-export function GitHubStars({ repo }: { repo: string }) {
+interface GitHubStarsProps {
+  repo: string;
+}
+
+export function GitHubStars({ repo }: GitHubStarsProps) {
   const [stars, setStars] = useState<number | null>(null);
 
   useEffect(() => {

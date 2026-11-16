@@ -8,14 +8,14 @@ const LENGTH = 96;
 const SPEED = 260;
 const MAX_STREAKS = 4;
 
-type Streak = {
+interface Streak {
   id: number;
   axis: "x" | "y";
   line: number;
   from: number;
   to: number;
   duration: number;
-};
+}
 
 function pick(max: number) {
   return Math.floor(Math.random() * max);

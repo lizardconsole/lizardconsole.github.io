@@ -1,16 +1,13 @@
 import type { ReactNode } from "react";
 
-export function SectionHeader({
-  eyebrow,
-  title,
-  children,
-  align = "left"
-}: {
+interface SectionHeaderProps {
   eyebrow: string;
   title: ReactNode;
   children?: ReactNode;
   align?: "left" | "center";
-}) {
+}
+
+export function SectionHeader({ eyebrow, title, children, align = "left" }: SectionHeaderProps) {
   const centered = align === "center";
   return (
     <div className={centered ? "mx-auto max-w-2xl text-center" : "max-w-2xl"}>

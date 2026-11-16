@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Prose } from "@/components/prose";
+import { Code } from "@/components/code";
 
 export const metadata: Metadata = {
   title: "LLM providers",
@@ -15,9 +16,7 @@ export default function LlmPage() {
         AI querying and prompt-driven charts are enabled by a single URL. Leave it unset and Lizard runs with AI turned off; everything else
         works as normal.
       </p>
-      <pre>
-        <code>{`LIZARD_LLM_URL=https://:<api-key>@<host>/<path>?model=<model>&provider=<provider>&api=<api>`}</code>
-      </pre>
+      <Code>{`LIZARD_LLM_URL=https://:<api-key>@<host>/<path>?model=<model>&provider=<provider>&api=<api>`}</Code>
 
       <table>
         <thead>
@@ -72,12 +71,10 @@ export default function LlmPage() {
       <p>
         On these hosts the provider is detected, so <code>provider</code> can be left out.
       </p>
-      <pre>
-        <code>{`https://:<key>@api.anthropic.com/v1?model=claude-sonnet-5
+      <Code>{`https://:<key>@api.anthropic.com/v1?model=claude-sonnet-5
 https://:<key>@api.openai.com/v1?model=gpt-5
 https://:<key>@generativelanguage.googleapis.com/v1beta?model=gemini-2.5-flash
-https://:<key>@api.deepseek.com?model=deepseek-chat`}</code>
-      </pre>
+https://:<key>@api.deepseek.com?model=deepseek-chat`}</Code>
 
       <h2>Gateways and self-hosted models</h2>
       <p>
@@ -85,21 +82,13 @@ https://:<key>@api.deepseek.com?model=deepseek-chat`}</code>
         <code>api=chat</code>.
       </p>
       <h3>OpenRouter</h3>
-      <pre>
-        <code>{`https://:<key>@openrouter.ai/api/v1?provider=openai&api=chat&model=google/gemini-2.5-pro`}</code>
-      </pre>
+      <Code>{`https://:<key>@openrouter.ai/api/v1?provider=openai&api=chat&model=google/gemini-2.5-pro`}</Code>
       <h3>Ollama</h3>
-      <pre>
-        <code>{`http://localhost:11434/v1?provider=openai&api=chat&model=llama3.1:8b`}</code>
-      </pre>
+      <Code>{`http://localhost:11434/v1?provider=openai&api=chat&model=llama3.1:8b`}</Code>
       <h3>LiteLLM or a corporate gateway</h3>
-      <pre>
-        <code>{`https://:<key>@ai.corp.net/v1?provider=openai&api=chat&model=anthropic/claude-sonnet-5`}</code>
-      </pre>
+      <Code>{`https://:<key>@ai.corp.net/v1?provider=openai&api=chat&model=anthropic/claude-sonnet-5`}</Code>
       <h3>An Anthropic-compatible proxy</h3>
-      <pre>
-        <code>{`https://:<key>@claude-proxy.internal/v1?provider=anthropic&model=claude-sonnet-5`}</code>
-      </pre>
+      <Code>{`https://:<key>@claude-proxy.internal/v1?provider=anthropic&model=claude-sonnet-5`}</Code>
       <p>
         If AI queries fail with “Invalid JSON response” through a gateway, it is likely mis-serializing tool-only turns on the Responses
         API. Switch to <code>api=chat</code>.

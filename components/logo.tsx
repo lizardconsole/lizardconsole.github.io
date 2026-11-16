@@ -5,7 +5,12 @@ const sizes = {
   sm: { icon: 24, text: "text-[15px]", mono: "text-[13px]", caret: "h-[13px] w-[6px]" }
 };
 
-export function Logo({ size = "md", priority = false }: { size?: keyof typeof sizes; priority?: boolean }) {
+interface LogoProps {
+  size?: keyof typeof sizes;
+  priority?: boolean;
+}
+
+export function Logo({ size = "md", priority = false }: LogoProps) {
   const s = sizes[size];
   return (
     <span className="flex items-center gap-2">

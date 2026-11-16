@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Prose } from "@/components/prose";
+import { Code } from "@/components/code";
 
 export const metadata: Metadata = {
   title: "DuckDB engine",
@@ -71,22 +72,16 @@ export default function DuckdbPage() {
         Same isolation, but DuckDB uses the directory as its <code>temp_directory</code>, so big queries slow down instead of failing. In
         Docker, put it on the data volume:
       </p>
-      <pre>
-        <code>LIZARD_DUCKDB_URL=file:///app/data/duckdb</code>
-      </pre>
+      <Code>{"LIZARD_DUCKDB_URL=file:///app/data/duckdb"}</Code>
 
       <h2>DuckDB server</h2>
       <p>
         A DuckDB server (DuckDB 2.0 or later, Quack protocol) takes federated work off the Lizard process. Start one with{" "}
         <code>duckdb -serve</code>, which prints its address and token, or from SQL:
       </p>
-      <pre>
-        <code>{`CALL quack_serve('quack:localhost:9494', token = '…');`}</code>
-      </pre>
+      <Code>{`CALL quack_serve('quack:localhost:9494', token = '…');`}</Code>
       <p>Then point Lizard at it, with the token in the password slot:</p>
-      <pre>
-        <code>LIZARD_DUCKDB_URL=https://:&lt;token&gt;@duck.internal:9494</code>
-      </pre>
+      <Code>{"LIZARD_DUCKDB_URL=https://:<token>@duck.internal:9494"}</Code>
       <p>
         The username is ignored, so <code>default:&lt;token&gt;@</code> also works. Percent-encode <code>@ : / ? # %</code> in the token.
         The URL is validated at startup: a missing port, a missing or short token, a path or any query parameter stops the server with a
@@ -120,9 +115,7 @@ export default function DuckdbPage() {
 
       <h3>Checking it works</h3>
       <p>After a federated query in Lizard, run this in the server’s console:</p>
-      <pre>
-        <code>SELECT database_name, type, readonly FROM duckdb_databases() ORDER BY 1;</code>
-      </pre>
+      <Code>{"SELECT database_name, type, readonly FROM duckdb_databases() ORDER BY 1;"}</Code>
       <p>
         Avoid selecting <code>path</code> in a shared session: for Postgres and MySQL attachments it can include the connection string.
       </p>

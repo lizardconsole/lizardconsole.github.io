@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Prose } from "@/components/prose";
+import { Code } from "@/components/code";
 import { DOCKER_IMAGE, APP_PORT } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -21,9 +22,11 @@ const minioCompose = `services:
     image: ${DOCKER_IMAGE}
     ports:
       - "${APP_PORT}:${APP_PORT}"
-    env_file: .env
     environment:
-      LIZARD_STORAGE_URL: s3://lizard:\${MINIO_PASSWORD}@minio:9000/lizard?use_ssl=false
+      LIZARD_ENCRYPTION_KEY: {{ENCRYPTION_KEY}}
+      LIZARD_STORAGE_URL: s3://lizard:{{MINIO_PASSWORD}}@minio:9000/lizard?use_ssl=false
+    volumes:
+      - lizard_data:/app/data
     depends_on:
       - minio
 
@@ -32,11 +35,12 @@ const minioCompose = `services:
     command: server /data
     environment:
       MINIO_ROOT_USER: lizard
-      MINIO_ROOT_PASSWORD: \${MINIO_PASSWORD}
+      MINIO_ROOT_PASSWORD: {{MINIO_PASSWORD}}
     volumes:
       - minio_data:/data
 
 volumes:
+  lizard_data:
   minio_data:`;
 
 const federatedJoin = `SELECT t.region, t.target, sum(o.total) AS actual
@@ -191,9 +195,7 @@ export default function FileStoragePage() {
         as <code>targets</code> with a sheet named <code>Q1</code>, query <code>"Q1"</code> on the connection itself, or{" "}
         <code>targets."Q1"</code> from a federated query. This compares targets in a spreadsheet against live orders:
       </p>
-      <pre>
-        <code>{federatedJoin}</code>
-      </pre>
+      <Code>{federatedJoin}</Code>
       <p>
         Declare a <Link href="/docs/integrations/databases">virtual relationship</Link> from a file column to a database table and the AI
         can make that join for you, and the grid shows linked records as readable labels.
@@ -233,14 +235,10 @@ export default function FileStoragePage() {
 
       <h2>Local disk</h2>
       <p>For a single instance, keep uploads on the same volume as the rest of Lizard’s data:</p>
-      <pre>
-        <code>{localRun}</code>
-      </pre>
+      <Code>{localRun}</Code>
 
       <h2>Amazon S3</h2>
-      <pre>
-        <code>{`LIZARD_STORAGE_URL=s3://AKIA…:…@s3.amazonaws.com/lizard-uploads?region=eu-west-1&prefix=prod`}</code>
-      </pre>
+      <Code>{`LIZARD_STORAGE_URL=s3://AKIA…:…@s3.amazonaws.com/lizard-uploads?region=eu-west-1&prefix=prod`}</Code>
       <table>
         <thead>
           <tr>
@@ -286,11 +284,10 @@ export default function FileStoragePage() {
       <h2>MinIO</h2>
       <p>
         Any S3-compatible store works. With MinIO in the same Compose project, use path-style addressing and plain HTTP on the internal
-        network. Create the <code>lizard</code> bucket in MinIO before the first upload.
+        network. Create the <code>lizard</code> bucket in MinIO before the first upload. The encryption key and MinIO password below are
+        generated in your browser, unique to you.
       </p>
-      <pre>
-        <code>{minioCompose}</code>
-      </pre>
+      <Code secrets={{ MINIO_PASSWORD: 12 }}>{minioCompose}</Code>
 
       <h2>Several instances</h2>
       <p>

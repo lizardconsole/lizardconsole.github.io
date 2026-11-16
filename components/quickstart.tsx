@@ -4,24 +4,16 @@ import { useState } from "react";
 import { Copy, Check } from "lucide-react";
 import { DOCKER_IMAGE, APP_PORT } from "@/lib/site";
 import { SectionHeader } from "./section-header";
+import { useSecretTemplate } from "@/hooks/use-secret-template";
 
-const envFile = `openssl rand -base64 32
+const envLine = "LIZARD_ENCRYPTION_KEY={{ENCRYPTION_KEY}}";
 
-cat > .env <<'EOF'
-LIZARD_ENCRYPTION_KEY=<paste the key printed above>
-LIZARD_LLM_URL=https://:sk-ant-…@api.anthropic.com/v1?model=claude-sonnet-5
-EOF`;
-
-const dockerCode = `${envFile}
-
-docker run -d -p ${APP_PORT}:${APP_PORT} \\
+const dockerCode = `docker run -d -p ${APP_PORT}:${APP_PORT} \\
   --env-file .env \\
   -v lizard_data:/app/data \\
   ${DOCKER_IMAGE}`;
 
-const npmCode = `${envFile}
-
-npm install
+const npmCode = `npm install
 npm run dev`;
 
 const tabs = [
@@ -32,14 +24,14 @@ const tabs = [
 type TabId = (typeof tabs)[number]["id"];
 
 const notes = [
-  "Generate the encryption key once and keep it. A new key would lock you out of stored passwords.",
-  "AI turns on when you add an LLM URL.",
-  "State lives in a local SQLite file, or your own Postgres for multiple instances.",
-  "Anthropic, OpenAI, Gemini, DeepSeek, or any compatible gateway such as Ollama."
+  "The encryption key is the only required setting. The one shown was generated in your browser just now. Copy it into .env once and keep it: a new key would lock you out of stored passwords.",
+  "AI is optional. Add LIZARD_LLM_URL to .env for Anthropic, OpenAI, Gemini, DeepSeek or any compatible gateway such as Ollama.",
+  "State lives in a local SQLite file, or your own Postgres for multiple instances."
 ];
 
 export function Quickstart() {
   const [activeTab, setActiveTab] = useState<TabId>("docker");
+  const envText = useSecretTemplate(envLine);
   const [copied, setCopied] = useState(false);
 
   const activeCode = tabs.find((t) => t.id === activeTab)!.code;
@@ -97,9 +89,20 @@ export function Quickstart() {
             </button>
           </div>
 
-          <pre className="max-h-90 overflow-x-auto bg-bg-secondary p-5 font-mono text-[12.5px] leading-6 text-text-primary">
-            <code>{activeCode}</code>
-          </pre>
+          <div className="bg-bg-secondary">
+            <div className="border-b border-border-primary px-5 py-4">
+              <p className="text-[12px] text-text-muted">1. Create .env</p>
+              <pre className="mt-2 overflow-x-auto font-mono text-[12.5px] leading-6 text-text-primary">
+                <code>{envText}</code>
+              </pre>
+            </div>
+            <div className="px-5 py-4">
+              <p className="text-[12px] text-text-muted">2. Start Lizard</p>
+              <pre className="mt-2 max-h-90 overflow-x-auto font-mono text-[12.5px] leading-6 text-text-primary">
+                <code>{activeCode}</code>
+              </pre>
+            </div>
+          </div>
         </div>
       </div>
     </section>

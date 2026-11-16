@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Prose } from "@/components/prose";
+import { Code } from "@/components/code";
 
 export const metadata: Metadata = {
   title: "Metadata database",
@@ -74,10 +75,8 @@ export default function MetadataPage() {
       </p>
 
       <h2>Postgres</h2>
-      <pre>
-        <code>{`LIZARD_METADATA_URL=postgres://lizard:…@db.internal:5432/lizard
-LIZARD_METADATA_POOL_MAX=10`}</code>
-      </pre>
+      <Code>{`LIZARD_METADATA_URL=postgres://lizard:…@db.internal:5432/lizard
+LIZARD_METADATA_POOL_MAX=10`}</Code>
       <ul>
         <li>
           <code>postgresql://</code> works too, and <code>?sslmode=</code> is honoured.
@@ -100,9 +99,7 @@ LIZARD_METADATA_POOL_MAX=10`}</code>
         Add <code>?schema=</code> to keep Lizard’s tables out of <code>public</code>. Lizard creates the schema if it is missing (the user
         then needs <code>CREATE</code> on the database) and pins every connection’s <code>search_path</code> to it.
       </p>
-      <pre>
-        <code>LIZARD_METADATA_URL=postgres://app:…@db.internal:5432/app?schema=lizard</code>
-      </pre>
+      <Code>{"LIZARD_METADATA_URL=postgres://app:…@db.internal:5432/app?schema=lizard"}</Code>
       <p>
         This lets Lizard live alongside an application, or two Lizard deployments share one database in separate schemas. If you connect
         through PgBouncer or another pooler, make sure it forwards the <code>options</code> startup parameter.

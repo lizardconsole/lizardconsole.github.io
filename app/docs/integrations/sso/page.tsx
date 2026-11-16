@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Prose } from "@/components/prose";
+import { Code } from "@/components/code";
 
 export const metadata: Metadata = {
   title: "Single sign-on",
@@ -63,11 +64,9 @@ export default function SsoPage() {
 
       <h2>Configuration</h2>
       <p>SSO is OpenID Connect (authorization code with PKCE), configured with one URL:</p>
-      <pre>
-        <code>{`LIZARD_SSO_URL=https://CLIENT_ID:CLIENT_SECRET@<issuer>?name=Keycloak&domain=acme.io
+      <Code>{`LIZARD_SSO_URL=https://CLIENT_ID:CLIENT_SECRET@<issuer>?name=Keycloak&domain=acme.io
 LIZARD_PUBLIC_URL=https://lizard.acme.io
-COOKIE_SECURE=true`}</code>
-      </pre>
+COOKIE_SECURE=true`}</Code>
       <ul>
         <li>
           The part after <code>@</code> is the issuer. It must serve <code>&lt;issuer&gt;/.well-known/openid-configuration</code>. HTTPS is
